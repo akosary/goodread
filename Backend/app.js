@@ -1,18 +1,19 @@
 require("dotenv").config();
 require("./config/database").connect();
-const express = require("express");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const express = require("express");
 const app = express();
-const userRouter = require("./Routes/users_example");
+const userRouter = require("./Routes/User");
+const usercontroller=require("./Controllers/Users/User")
 const auth = require("./middleware/auth");
 
 app.use(express.json());
 
-// Logic goes here
 
 module.exports = app;
-
+app.post('/register', usercontroller.registeration);
+app.post('/login',usercontroller.loggedin)
 app.use("/users", auth, userRouter);
 
 app.post("/welcome", auth, (req, res) => {
