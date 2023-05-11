@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const app = express();
 const userRouter = require("./Routes/users_example");
 const auth = require("./middleware/auth");
+const bookRouter = require("./Routes/bookRoute")
 
 app.use(express.json());
 
@@ -14,6 +15,9 @@ app.use(express.json());
 module.exports = app;
 
 app.use("/users", auth, userRouter);
+app.use("/books", bookRouter);
+
+
 
 app.post("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome");
