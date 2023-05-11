@@ -67,6 +67,14 @@ const findOneBooks = async (req, res) => {
   }
 };
 
+const findPopular = async (req, res) => {
+  try {
+    const categories = await Category.find({});
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+};
+
 module.exports = {
   findAll,
   findOne,
