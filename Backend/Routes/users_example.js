@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user_example");
+// const User = require("../models/user_example");
 
 router.get("/", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
