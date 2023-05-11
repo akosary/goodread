@@ -21,22 +21,22 @@ function validateInput(input,min,max) {
   }
 }
 function validateImage(filename) {
-  // if (!fs.existsSync(filename) || !fs.statSync(filename).isFile()) {
-  //   return false;
-  // }
-  // const ext = path.extname(filename);
-  // if (!['.jpg', '.jpeg', '.png', '.gif', '.webp', '.tiff'].includes(ext)) {
-  //   return false;
-  // }
-  // try {
-  //   const buffer = fs.readFileSync(filename);
-  //   const metadata = sharp(buffer).metadata();
-  //   if (!metadata.format || !['jpeg', 'png', 'gif', 'webp', 'tiff'].includes(metadata.format)) {
-  //     return false;
-  //   }
-  // } catch (err) {
-  //   return false;
-  // }
+  if (!fs.existsSync(filename) || !fs.statSync(filename).isFile()) {
+    return false;
+  }
+  const ext = path.extname(filename);
+  if (!['.jpg', '.jpeg', '.png', '.gif', '.webp', '.tiff'].includes(ext)) {
+    return false;
+  }
+  try {
+    const buffer = fs.readFileSync(filename);
+    const metadata = sharp(buffer).metadata();
+    if (!metadata.format || !['jpeg', 'png', 'gif', 'webp', 'tiff'].includes(metadata.format)) {
+      return false;
+    }
+  } catch (err) {
+    return false;
+  }
   return true;
 }
 const registeration= async (req, res) => {
