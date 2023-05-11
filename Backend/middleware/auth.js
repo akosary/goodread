@@ -1,19 +1,16 @@
 const jwt = require("jsonwebtoken");
 const config = process.env;
 const verifyToken = (req, res, next) => {
-  const token =
-    req.body.token || req.query.token;
-    //  || req.headers['x-access-token'];
-
-  if (!token) {
+const authHeader = req.headers['authorization'];
+  if (!authHeader) {
     return res.status(403).send("A token is required for authentication");
   }
+  const token = authHeader.split(' ')[1];
   try {
     const decoded = jwt.verify(token,config.TOKEN_KEY);
-    req.user = decoded;
+    req.body.user_id = decoded.id; //store id of authenticated user in req
   } catch (err) {
     return res.status(401).send("Invalid Token");
-    // console.log(err);
   }
   return next();
 };

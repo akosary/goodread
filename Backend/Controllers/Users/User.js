@@ -21,22 +21,22 @@ function validateInput(input,min,max) {
   }
 }
 function validateImage(filename) {
-  if (!fs.existsSync(filename) || !fs.statSync(filename).isFile()) {
-    return false;
-  }
-  const ext = path.extname(filename);
-  if (!['.jpg', '.jpeg', '.png', '.gif', '.webp', '.tiff'].includes(ext)) {
-    return false;
-  }
-  try {
-    const buffer = fs.readFileSync(filename);
-    const metadata = sharp(buffer).metadata();
-    if (!metadata.format || !['jpeg', 'png', 'gif', 'webp', 'tiff'].includes(metadata.format)) {
-      return false;
-    }
-  } catch (err) {
-    return false;
-  }
+  // if (!fs.existsSync(filename) || !fs.statSync(filename).isFile()) {
+  //   return false;
+  // }
+  // const ext = path.extname(filename);
+  // if (!['.jpg', '.jpeg', '.png', '.gif', '.webp', '.tiff'].includes(ext)) {
+  //   return false;
+  // }
+  // try {
+  //   const buffer = fs.readFileSync(filename);
+  //   const metadata = sharp(buffer).metadata();
+  //   if (!metadata.format || !['jpeg', 'png', 'gif', 'webp', 'tiff'].includes(metadata.format)) {
+  //     return false;
+  //   }
+  // } catch (err) {
+  //   return false;
+  // }
   return true;
 }
 const registeration= async (req, res) => {
@@ -66,20 +66,18 @@ const registeration= async (req, res) => {
       if (!filename || !validateImage(filename)) {
        return res.status(400).json({ error: 'Invalid image file!' });
       }
-   
-      
       const hashedPassword = await bcrypt.hash(password, 10);
-      const token = jwt.sign({ _id: this._id },config.TOKEN_KEY);
       const user = new userModel({
         email: email,
         password: hashedPassword,
         firstname: firstname,
         lastname:lastname,
         image:filename,
-        token:token
+        role:"user"
       });
       const newUser = await user.save();
-      res.json({newUser });
+      const token = jwt.sign({ id: newUser._id },config.TOKEN_KEY);
+      res.json({newUser,token });
     } catch (error) {
       console.error(error);
       res.status(500).send('An error occurred');
@@ -105,7 +103,6 @@ const loggedin= async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, config.TOKEN_KEY);
-
     res.json({ message: 'Login successful.', token });
   };
 module.exports = { registeration,loggedin };

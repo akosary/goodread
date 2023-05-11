@@ -9,6 +9,7 @@ const multer = require('multer');
 const userRouter = require("./Routes/User");
 const usercontroller=require("./Controllers/Users/User")
 const auth = require("./middleware/auth");
+const ISADMIN=require("./middleware/IsAdmin")
 
 app.use(express.json());
 
@@ -18,6 +19,7 @@ module.exports = app;
 app.post('/register', usercontroller.registeration);
 app.post('/login',usercontroller.loggedin)
 app.use("/users", auth, userRouter);
+app.use("/admins",ISADMIN,userRouter);
 
 app.post("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome");
