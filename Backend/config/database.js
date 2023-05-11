@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const { MONGO_URI } = process.env;
 
-<<<<<<< HEAD
 // exports.connect = async () => {
 //   // Connecting to the database
 //   await mongoose.connect(MONGO_URI, {
@@ -17,23 +16,6 @@ const { MONGO_URI } = process.env;
 //   //   console.error(error);
 //   //   process.exit(1);
 //   // });
-=======
-// exports.connect = () => {
-//   // Connecting to the database
-//   mongoose
-//     .connect(MONGO_URI, {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//     })
-//     .then(() => {
-//       console.log("Successfully connected to database");
-//     })
-//     .catch((error) => {
-//       console.log("database connection failed. exiting now...");
-//       console.error(error);
-//       process.exit(1);
-//     });
->>>>>>> origin/ahmed_ramadan
 // };
 
 exports.connect = async () => {
