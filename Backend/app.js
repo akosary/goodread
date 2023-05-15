@@ -12,7 +12,7 @@ const morgan = require("morgan");
 const auhorRouter = require("./Routes/author-routes");
 const auth = require("./middleware/auth");
 const bookRouter = require("./Routes/bookRoute");
-const rateRouter = require("./Routes/rate");
+const rateRouter = require("./Routes/rate.routes");
 const ISADMIN = require("./middleware/IsAdmin");
 const categoryRouter = require("./Routes/categories.routes");
 
