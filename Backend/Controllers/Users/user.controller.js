@@ -2,10 +2,7 @@ const User = require("../../models/userModel");
 const config = process.env;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const path = require("path");
-const fs = require("fs");
-const mime = require("mime");
-const sharp = require("sharp");
+const validation=require("../../middleware/ValidationInputs");
 const hashing = require("../../middleware/hashing");
 
 // CRUD operations
@@ -82,51 +79,6 @@ const remove = async (req, res) => {
   }
 };
 
-// Validation functions
-function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(String(email).toLowerCase());
-}
-function validatePassword(password, minLength, maxLength) {
-  const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$&/?]).{8,20}$/;
-  return (
-    password.length >= minLength &&
-    password.length <= maxLength &&
-    re.test(password)
-  );
-}
-function validateInput(input, min, max) {
-  if (
-    input &&
-    typeof input == "string" &&
-    input.length > min &&
-    input.length < max
-  ) {
-    return true;
-  }
-}
-function validateImage(filename) {
-  if (!fs.existsSync(filename) || !fs.statSync(filename).isFile()) {
-    return false;
-  }
-  const ext = path.extname(filename);
-  if (![".jpg", ".jpeg", ".png", ".gif", ".webp", ".tiff"].includes(ext)) {
-    return false;
-  }
-  try {
-    const buffer = fs.readFileSync(filename);
-    const metadata = sharp(buffer).metadata();
-    if (
-      !metadata.format ||
-      !["jpeg", "png", "gif", "webp", "tiff"].includes(metadata.format)
-    ) {
-      return false;
-    }
-  } catch (err) {
-    return false;
-  }
-  return true;
-}
 
 // registration and logging
 const registeration = async (req, res) => {
@@ -134,19 +86,19 @@ const registeration = async (req, res) => {
     // res.setHeader("Content-Type", "multipart/form-data");
     const { firstname, lastname, email, password, confirmPassword, filename } =
       req.body;
-    if (!validateInput(firstname, 3, 100)) {
+    if (!validation.validateInput(firstname, 3, 100)) {
       return res.status(400).json({
         error:
           "Invalid first name! Input must be a string at least 3 charcters.",
       });
     }
-    if (!validateInput(lastname, 3, 100)) {
+    if (!validation.validateInput(lastname, 3, 100)) {
       return res.status(400).json({
         error:
           "Invalid last name! Input must be a string at least 3 charcters.",
       });
     }
-    if (!email || !validateEmail(email)) {
+    if (!email || !validation.validateEmail(email)) {
       return res.status(400).json({ error: "Invalid email address!" });
     } else {
       const input_user = await User.findOne({ email });
@@ -154,7 +106,7 @@ const registeration = async (req, res) => {
         return res.status(400).json({ error: "Email already exists!" });
       }
     }
-    if (!validatePassword(password, 8, 20)) {
+    if (!validation.validatePassword(password, 8, 20)) {
       return res.status(400).json({
         error:
           "At least 8 charcter one uppercase and one number and containing one from: @#$&",
@@ -163,7 +115,7 @@ const registeration = async (req, res) => {
     if (password !== confirmPassword) {
       return res.status(400).json({ message: "passwords not match" });
     }
-    if (!filename || !validateImage(filename)) {
+    if (!filename || !validation.validateImage(filename)) {
       return res.status(400).json({ error: "Invalid image file!" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -202,9 +154,22 @@ const loggedin = async (req, res) => {
   if (!isMatch) {
     return res.status(401).json({ message: "Invalid email or password." });
   }
-
   const token = jwt.sign({ id: user._id }, config.TOKEN_KEY);
-  res.json({ message: "Login successful.", token });
+  if (user.role === 'admin') {
+    res.json({
+      redirectUrl: '/admins',
+      message: "Login successful admin.", 
+      token:token
+    });
+  } else {
+    res.json({
+      redirectUrl: '/users',
+      message: "Login successful user.", 
+      token:token
+    });
+  }
+  
+  
 };
 
 module.exports = { registeration, loggedin, get, getOne, post, update, remove };
