@@ -1,6 +1,6 @@
 const express = require("express");
 const Router = express.Router();
-const getOneRateOrStatus = require("../middleware/rateOrStatus");
+const getOneRateOrStatus = require("../middleware/getRateOrStatus");
 const rateController = require("../Controllers/Rate/rate.controller");
 
 Router.get("/", rateController.get);

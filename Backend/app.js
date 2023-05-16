@@ -24,7 +24,7 @@ app.use(express.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/register", usercontroller.registeration);
 app.post("/login", usercontroller.loggedin);
-// app.use("/users", auth, userRouter);
+app.use("/users", auth, userRouter);
 app.use("/users", userRouter);
 app.use("/books", bookRouter);
 app.use("/rates", rateRouter);
