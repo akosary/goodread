@@ -29,6 +29,7 @@ import Presentation from "layouts/pages/presentation";
 // Material Kit 2 React routes
 import routes from "routes";
 import AdminLogin from "./ourcomponents/AdminLogin/AdminLogin";
+import UserRegister from "./ourcomponents/registeration/UserRegister";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -60,6 +61,7 @@ export default function App() {
         <Route path="/presentation" element={<Presentation />} />
         <Route path="*" element={<Navigate to="/presentation" />} />
         <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/user" element={<UserRegister />} />
       </Routes>
     </ThemeProvider>
   );
