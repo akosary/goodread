@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-
+import { Route, Routes } from 'react-router-dom';
+import { Fragment } from 'react';
+import Navbar from './components/UserNavbar';
+import AdminLogin from './components/AdminLogin/AdminLogin';
+import Adminpage from './components/AdminLogin/Adminpage';
+import UserLogin from './components/UserLogin/UserLogin';
+import Userpage from './components/UserLogin/Userpage';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+ 
+  <Routes>
+    <Route path='/' element={ <Navbar/>}/>
+    <Route path='/admin' element={ <AdminLogin/>}/>
+    <Route path='/admins' element={ <Adminpage/>}/>
+    <Route path='/user' element={ <UserLogin/>}/>
+    <Route path='/users' element={ <Userpage/>}/>
+    {/* <Route path='*' element={<Error/>}/> */}
+  </Routes>
+</Fragment>
+    
+   
   );
 }
 
