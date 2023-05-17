@@ -136,7 +136,7 @@ const registeration = async (req, res) => {
   }
 };
 
-const loggedin = async (req, res) => {
+const Adminloggedin = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -147,29 +147,56 @@ const loggedin = async (req, res) => {
 
   const user = await User.findOne({ email });
   if (!user) {
-    return res.status(401).json({ message: "Invalid email or password." });
+    return res.status(401).json({ message: "Invalid email" });
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return res.status(401).json({ message: "Invalid email or password." });
+    return res.status(401).json({ message: "Invalid password." });
   }
-  const token = jwt.sign({ id: user._id }, config.TOKEN_KEY);
+  
   if (user.role === 'admin') {
+    const token = jwt.sign({ id: user._id }, config.TOKEN_KEY);
     res.json({
       redirectUrl: '/admins',
       message: "Login successful admin.", 
       token:token
     });
   } else {
-    res.json({
-      redirectUrl: '/users',
-      message: "Login successful user.", 
-      token:token
-    });
+    return res.status(403).json({message:"not admin"});
   }
   
+};
+const Userloggedin = async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res
+      .status(400)
+      .json({ message: "Please provide an email and password." });
+  }
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(401).json({ message: "Invalid email" });
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res.status(401).json({ message: "Invalid password." });
+  }
+  
+  if (user.role === 'user') {
+    const token = jwt.sign({ id: user._id }, config.TOKEN_KEY);
+    res.json({
+      redirectUrl: '/users',
+      message: "Login successful admin.", 
+      token:token
+    });
+  } else {
+    return res.status(403).json({message:"not user"});
+  }
   
 };
 
-module.exports = { registeration, loggedin, get, getOne, post, update, remove };
+module.exports = { registeration, Adminloggedin,Userloggedin, get, getOne, post, update, remove };
