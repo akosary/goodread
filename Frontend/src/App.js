@@ -1,4 +1,7 @@
+
 // import logo from './logo.svg';
+import Home from "./components/Home/home.jsx";
+import $ from "jquery"
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Fragment } from 'react';
@@ -21,8 +24,5 @@ function App() {
   </Routes>
 </Fragment>
     
-   
-  );
-}
-
+)}
 export default App;
