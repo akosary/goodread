@@ -25,6 +25,8 @@ class CategoryController {
   }
 
   async create(req, res) {
+    console.log(req);
+    console.log(req.body);
     const validation = validationCategory.validate(req.body);
     if (validation.error)
       return res.status(500).send("name must be string & required");
@@ -66,7 +68,7 @@ class CategoryController {
         .populate("categoryId");
       return res.status(200).json(books);
     } catch (err) {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     }
   }
 

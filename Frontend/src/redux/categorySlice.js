@@ -1,18 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-const url = "http://localhost:3001";
+import { extraReducers } from "./extraRedusers";
+
 const categorySlice = createSlice({
   name: "category",
   initialState: {
     category: [],
+    loading: false,
+    error: null,
+    message: "",
+    categoryBooks: [],
   },
   reducers: {
-    async findAll(state, action) {
-      state.category.push(await axios.get(`${url}/categories`));
-      console.log(state.category);
+    deleteMessage(state, action) {
+      state.message = "";
     },
+  },
+  extraReducers: (builder) => {
+    extraReducers(builder);
   },
 });
 
-export const { findAll } = categorySlice.actions;
+export const { deleteMessage } = categorySlice.actions;
 export default categorySlice.reducer;
