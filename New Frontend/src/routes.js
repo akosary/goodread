@@ -40,7 +40,7 @@ Coded by www.creative-tim.com
 import Icon from "@mui/material/Icon";
 
 // @mui icons
-import GitHubIcon from "@mui/icons-material/GitHub";
+// import GitHubIcon from "@mui/icons-material/GitHub";
 
 // Pages
 import AboutUs from "layouts/pages/landing-pages/about-us";
@@ -67,8 +67,39 @@ import Dropdowns from "layouts/sections/elements/dropdowns";
 import ProgressBars from "layouts/sections/elements/progress-bars";
 import Toggles from "layouts/sections/elements/toggles";
 import Typography from "layouts/sections/elements/typography";
+import Home from "./components/Home/home.jsx";
 
 const routes = [
+  {
+    name: "Home",
+    icon: <Icon>home</Icon>,
+    route: "/home",
+    component: <Home />,
+  },
+  {
+    name: "Categories",
+    icon: <Icon>category</Icon>,
+    route: "/categories",
+    component: <Home />,
+  },
+  {
+    name: "Authors",
+    icon: <Icon>person</Icon>,
+    route: "/authors",
+    component: <Home />,
+  },
+  {
+    name: "About Us ",
+    icon: <Icon>article</Icon>,
+    route: "/pages/landing-pages/about-us",
+    component: <AboutUs />,
+  },
+  {
+    name: "Contact Us",
+    icon: <Icon>phone</Icon>,
+    route: "/pages/landing-pages/contact-us",
+    component: <ContactUs />,
+  },
   {
     name: "pages",
     icon: <Icon>dashboard</Icon>,
@@ -263,11 +294,6 @@ const routes = [
         href: "https://www.creative-tim.com/learning-lab/react/datepicker/material-kit/",
       },
     ],
-  },
-  {
-    name: "github",
-    icon: <GitHubIcon />,
-    href: "https://www.github.com/creativetimofficial/material-kit-react",
   },
 ];
 

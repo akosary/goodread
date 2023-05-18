@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useEffect } from "react";
 
 // react-router components
@@ -28,6 +13,12 @@ import Presentation from "layouts/pages/presentation";
 
 // Material Kit 2 React routes
 import routes from "routes";
+
+// Components
+import Home from "./components/Home/home.jsx";
+import UserLogin from "./components/user Login/userLogin.jsx";
+import UserDashboard from "./components/Dashboard/user/index.jsx";
+import All from "./components/Dashboard/user/allread.jsx";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -56,6 +47,10 @@ export default function App() {
       <CssBaseline />
       <Routes>
         {getRoutes(routes)}
+        <Route path="/" element={<Home />} />
+        <Route path="/userDashboard" element={<UserDashboard />} />
+        <Route path="/userLogin" element={<UserLogin />} />
+        <Route path="/all" element={<All />} />
         <Route path="/presentation" element={<Presentation />} />
         <Route path="*" element={<Navigate to="/presentation" />} />
       </Routes>
