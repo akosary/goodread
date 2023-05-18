@@ -1,6 +1,6 @@
 const express = require("express");
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const cors = require("cors");
+const bodyParser = require("body-parser");
 require("dotenv").config();
 require("./config/database").connect();
 const bcrypt = require("bcrypt");
@@ -16,9 +16,11 @@ const bookRouter = require("./Routes/bookRoute");
 const rateRouter = require("./Routes/rate.routes");
 const ISADMIN = require("./middleware/IsAdmin");
 const categoryRouter = require("./Routes/categories.routes");
-app.use(cors({
-    origin: 'http://localhost:3000'
-  }));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 app.use(bodyParser.json());
 //  show logs in development environment
 app.use(morgan("dev"));
