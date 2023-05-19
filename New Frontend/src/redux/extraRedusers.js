@@ -21,7 +21,7 @@ export const extraReducers = (builder) => {
       state.error = action.error.message;
     });
   builder
-    .addCase(addCategory.fulfilled, (state, action) => {
+    .addCase(addCategory.fulfilled, (state) => {
       state.loading = false;
       state.message = "Category Added Successfully";
     })
@@ -33,7 +33,7 @@ export const extraReducers = (builder) => {
       state.error = action.error.message;
     });
   builder
-    .addCase(editCategory.fulfilled, (state, action) => {
+    .addCase(editCategory.fulfilled, (state) => {
       state.loading = false;
       state.message = "Category Edited Successfully";
     })
@@ -45,7 +45,7 @@ export const extraReducers = (builder) => {
       state.error = action.error.message;
     });
   builder
-    .addCase(deleteCategory.fulfilled, (state, action) => {
+    .addCase(deleteCategory.fulfilled, (state) => {
       state.loading = false;
       state.message = "Category Deleted Successfully";
     })
@@ -72,7 +72,7 @@ export const extraReducers = (builder) => {
     .addCase(popular.fulfilled, (state, action) => {
       state.loading = false;
       // state.categoryBooks = action.payload;
-      console.log(action.payload)
+      console.log(action.payload);
     })
     .addCase(popular.pending, (state) => {
       state.loading = true;

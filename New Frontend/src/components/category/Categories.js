@@ -1,12 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
-import { Card, Container, ListGroup } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { findAll } from "../../redux/asyncThunk";
 import MKButton from "components/MKButton";
 import MKBox from "components/MKBox";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
-import MKTypography from "components/MKTypography";
 import { Grid } from "@mui/material";
 
 export default function Categories() {
@@ -25,13 +23,10 @@ export default function Categories() {
         width="100%"
         minHeight="100vh"
         sx={{
-          backgroundImage: ({
-            functions: { linearGradient, rgba },
-            palette: { gradients },
-          }) =>
+          backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
             `${linearGradient(
               rgba(gradients.dark.main, 0.6),
-              rgba(gradients.dark.state, 0.6),
+              rgba(gradients.dark.state, 0.6)
             )}, url(${bgImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",

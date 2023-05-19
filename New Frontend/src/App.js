@@ -27,8 +27,8 @@ import All from "./components/Dashboard/user/allread.jsx";
 import AllCategories from "components/category/AllCategories";
 import Categories from "components/category/Categories";
 import CategoryDetails from "components/category/CategoryDetails";
-import { Provider } from "react-redux";
-import categoryStore from "/src/Redux/categoryStore";
+// import { Provider } from "react-redux";
+// import categoryStore from "/src/Redux/categoryStore";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -53,27 +53,27 @@ export default function App() {
     });
 
   return (
-    <Provider store={categoryStore}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Routes>
-          {getRoutes(routes)}
-          <Route path="/" element={<Home />} />
-          <Route path="/userDashboard" element={<UserDashboard />} />
-          <Route path="/userLogin" element={<UserLogin />} />
-          <Route path="/all" element={<All />} />
-          <Route path="/presentation" element={<Presentation />} />
-          <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/admins" element={<Adminpage />} />
-          <Route path="/user" element={<UserLogin />} />
-          <Route path="/users" element={<Userpage />} />
-          <Route path="/register" element={<UserRegister />} />
-          <Route path="categories" Component={AllCategories} />
-          <Route path="categories/groups" Component={Categories} />
-          <Route path="categories/:id/books" Component={CategoryDetails} />
-          <Route path="*" element={<Navigate to="/presentation" />} />
-        </Routes>
-      </ThemeProvider>
-    </Provider>
+    // <Provider store={categoryStore}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Routes>
+        {getRoutes(routes)}
+        <Route path="/" element={<Home />} />
+        <Route path="/userDashboard" element={<UserDashboard />} />
+        <Route path="/userLogin" element={<UserLogin />} />
+        <Route path="/all" element={<All />} />
+        <Route path="/presentation" element={<Presentation />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admins" element={<Adminpage />} />
+        <Route path="/user" element={<UserLogin />} />
+        <Route path="/users" element={<Userpage />} />
+        <Route path="/register" element={<UserRegister />} />
+        <Route path="categories" Component={AllCategories} />
+        <Route path="categories/groups" Component={Categories} />
+        <Route path="categories/:id/books" Component={CategoryDetails} />
+        <Route path="*" element={<Navigate to="/presentation" />} />
+      </Routes>
+    </ThemeProvider>
+    // </Provider>
   );
 }

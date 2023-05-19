@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-const baseURL = "http://127.0.0.1:3500";
+const baseURL = "http://localhost:3001";
 const nestedRoute = "/rates";
 
 export const fetchApiData = createAsyncThunk("userDashboard/fetchData", async () => {

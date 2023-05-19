@@ -11,7 +11,7 @@ const categorySlice = createSlice({
     categoryBooks: [],
   },
   reducers: {
-    deleteMessage(state, action) {
+    deleteMessage(state) {
       state.message = "";
     },
   },

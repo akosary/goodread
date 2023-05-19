@@ -1,14 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ModalForm from "./ModalForm";
-import {
-  addCategory,
-  deleteCategory,
-  editCategory,
-  findAll,
-} from "../../redux/asyncThunk";
+import { addCategory, deleteCategory, editCategory, findAll } from "../../redux/asyncThunk";
 import { deleteMessage } from "../../redux/categorySlice";
 import MKAlert from "components/MKAlert";
 export default function AllCategories() {

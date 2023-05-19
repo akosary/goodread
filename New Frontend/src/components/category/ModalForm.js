@@ -1,5 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import Container from "@mui/material/Container";
@@ -21,28 +22,18 @@ function ModalForm(props) {
   });
 
   const validationForm = Yup.object().shape({
-    categoryName: Yup.string()
-      .min(3, "This name is too short!")
-      .required("This name is required"),
+    categoryName: Yup.string().min(3, "This name is too short!").required("This name is required"),
   });
 
   return (
     <MKBox component="section" py={2}>
       <Container>
         <Grid container item xs={12} lg={10} justifyContent="center" mx="auto">
-          <button
-            className={`${props.styleBtn} border-0`}
-            color="info"
-            onClick={toggleModal}
-          >
+          <button className={`${props.styleBtn} border-0`} color="info" onClick={toggleModal}>
             {props.content}
           </button>
         </Grid>
-        <Modal
-          open={show}
-          onClose={toggleModal}
-          sx={{ display: "grid", placeItems: "center" }}
-        >
+        <Modal open={show} onClose={toggleModal} sx={{ display: "grid", placeItems: "center" }}>
           <Slide direction="down" in={show} timeout={500}>
             <MKBox
               position="relative"
@@ -53,18 +44,9 @@ function ModalForm(props) {
               bgColor="white"
               shadow="xl"
             >
-              <MKBox
-                display="flex"
-                alignItems="center"
-                justifyContent="space-between"
-                p={2}
-              >
+              <MKBox display="flex" alignItems="center" justifyContent="space-between" p={2}>
                 <MKTypography variant="h5">{props.status}</MKTypography>
-                <CloseIcon
-                  fontSize="medium"
-                  sx={{ cursor: "pointer" }}
-                  onClick={toggleModal}
-                />
+                <CloseIcon fontSize="medium" sx={{ cursor: "pointer" }} onClick={toggleModal} />
               </MKBox>
               <Divider sx={{ my: 0 }} />
               <MKBox p={2}>
@@ -98,11 +80,7 @@ function ModalForm(props) {
                           </MKAlert>
                         )}
                         <Divider sx={{ my: 0 }} />
-                        <MKBox
-                          display="flex"
-                          justifyContent="space-between"
-                          p={1.5}
-                        >
+                        <MKBox display="flex" justifyContent="space-between" p={1.5}>
                           <MKButton
                             className="m-auto"
                             type="submit"
@@ -119,16 +97,8 @@ function ModalForm(props) {
                   <>
                     Are you sure to delete this category ?
                     <Divider sx={{ my: 4 }} />
-                    <MKBox
-                      display="flex"
-                      justifyContent="space-between"
-                      p={1.5}
-                    >
-                      <MKButton
-                        variant="gradient"
-                        color="dark"
-                        onClick={toggleModal}
-                      >
+                    <MKBox display="flex" justifyContent="space-between" p={1.5}>
+                      <MKButton variant="gradient" color="dark" onClick={toggleModal}>
                         close
                       </MKButton>
                       <MKButton

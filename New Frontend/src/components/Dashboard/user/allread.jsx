@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchApiData, updateRateOrStatus } from "Redux/userdashboard/slice";
 
 export default function allread({ filter }) {
-  const dispatch = useDispatch();
   const { data, isLoading, error } = useSelector((state) => state.userDashboard);
+  const dispatch = useDispatch();
   const Rows = ["Book Name", "Author", "Rate", "Average Ratting", "Status"];
 
   const handleDataReceived = (data) => {
