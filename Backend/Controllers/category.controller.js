@@ -1,5 +1,6 @@
 const Category = require("../models/category.model");
 const bookModel = require("../models/book");
+const rateModel = require("../models/rate");
 const joi = require("joi");
 const validationCategory = joi.object({
   name: joi.string().required(),
@@ -9,6 +10,43 @@ class CategoryController {
     try {
       const categories = await Category.find();
       return res.status(200).json(categories);
+    } catch (error) {
+      return res.status(500).send(error);
+    }
+  }
+
+  async popular(req, res) {
+    try {
+      const categories = await rateModel.aggregate([
+        {
+          $lookup: {
+            from: "books",
+            localField: "book",
+            foreignField: "_id",
+            as: "bookInfo",
+          },
+        },
+        {
+          $group: {
+            _id: "$book",
+            averageRate: { $avg: "$rate" },
+            categoryId: {
+              $first: { $arrayElemAt: ["$bookInfo.categoryId", 0] },
+            },
+          },
+        },
+        {
+          $group: {
+            _id: "$categoryId",
+            averageRateOfAllCategory: { $avg: "$averageRate" },
+          },
+        },
+        { $sort: { averageRateOfAllCategory: -1 } },
+        { $limit: 5 },
+      ]);
+      const ids = categories.map(({ _id }) => _id);
+      const categoryNames = await Category.find({ _id: { $in: ids } });
+      return res.status(200).json(categoryNames);
     } catch (error) {
       return res.status(500).send(error);
     }
@@ -25,8 +63,6 @@ class CategoryController {
   }
 
   async create(req, res) {
-    console.log(req);
-    console.log(req.body);
     const validation = validationCategory.validate(req.body);
     if (validation.error)
       return res.status(500).send("name must be string & required");
@@ -41,7 +77,7 @@ class CategoryController {
   async remove(req, res) {
     const id = req.params.id;
     try {
-      console.log(id);
+      await bookModel.deleteMany({ categoryId: id });
       await Category.deleteOne({ _id: id });
       return res.status(204).send("");
     } catch (error) {
@@ -69,27 +105,6 @@ class CategoryController {
       return res.status(200).json(books);
     } catch (err) {
       return res.status(500).send(err);
-    }
-  }
-
-  async findPopular(req, res) {
-    // const categories_ids = await Category.find({}, { _id: 1 });
-    // const books =
-    const test = await bookModel.find().aggregate([
-      {
-        $group: {
-          _id: "$categoryId",
-          books: { $push: "$$ROOT" },
-        },
-      },
-    ]);
-    console.log("test");
-    console.log(test);
-    return res.status(200).json(test);
-    try {
-      const categories = await Category.find({});
-    } catch (error) {
-      return res.status(500).send(error);
     }
   }
 }
