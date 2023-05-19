@@ -16,23 +16,29 @@ const bookRouter = require("./Routes/bookRoute");
 const rateRouter = require("./Routes/rate.routes");
 const ISADMIN = require("./middleware/IsAdmin");
 const categoryRouter = require("./Routes/categories.routes");
+const upload = require("./utils/multer-upload");
 app.use(
   cors({
     origin: "http://localhost:3000",
   })
 );
 app.use(bodyParser.json());
+app.use("/uploads", express.static("uploads"));
 //  show logs in development environment
 app.use(morgan("dev"));
 
 app.use(express.json());
 
 // app.use(bodyParser.urlencoded({ extended: true }));
-app.post("/register", usercontroller.registeration);
+// const upload = multer({ dest: 'uploads/' , limits: {
+//   fileSize: 1024 * 1024 * 5, // 5MB
+// },});
+app.post("/register", upload.single("image"), usercontroller.registeration);
+
 app.post("/Adminlogin", usercontroller.Adminloggedin);
 app.post("/Userlogin", usercontroller.Userloggedin);
 app.use("/users", auth, userRouter);
-app.use("/users", userRouter);
+// app.use("/users", userRouter);
 app.use("/books", bookRouter);
 app.use("/rates", rateRouter);
 app.use("/categories", categoryRouter);

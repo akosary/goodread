@@ -2,9 +2,9 @@ const jwt = require("jsonwebtoken");
 const config = process.env;
 const userModel = require("../models/userModel");
 const autherization = async (req, res, next) => {
-  const authHeader = req.headers["authorization"];
+const authHeader = req.headers["authorization"];
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(403).send("A token is required for authentication");
+    return res.status(403).json({message:"A token is required for authentication"});
   }
   const token = authHeader.split(" ")[1];
   try {
@@ -12,14 +12,13 @@ const autherization = async (req, res, next) => {
     const user_id = decoded.id;
     const user = await userModel.findOne({ _id: user_id });
     if (user.role === "admin") {
-      //store admin id
       next();
     } else {
-      res.status(403).json({ error: "Access denied" });
+      res.status(403).json({ message: "Access denied" });
     }
   } catch (err) {
     console.log(err);
-    res.status(401).json({ error: "Invalid or expired token" });
+    res.status(401).json({ message: "Invalid or expired token" });
   }
 };
 module.exports = autherization;

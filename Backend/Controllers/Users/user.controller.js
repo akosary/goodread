@@ -83,53 +83,60 @@ const remove = async (req, res) => {
 // registration and logging
 const registeration = async (req, res) => {
   try {
-    // res.setHeader("Content-Type", "multipart/form-data");
-    const { firstname, lastname, email, password, confirmPassword, filename } =
-      req.body;
+    res.setHeader("Content-Type", "multipart/form-data");
+    const { firstname, lastname, email, password, confirmPassword } =req.body;
+    const image=req.file.filename;
+    console.log(image);
     if (!validation.validateInput(firstname, 3, 100)) {
       return res.status(400).json({
-        error:
+        message:
           "Invalid first name! Input must be a string at least 3 charcters.",
       });
     }
     if (!validation.validateInput(lastname, 3, 100)) {
       return res.status(400).json({
-        error:
+        message:
           "Invalid last name! Input must be a string at least 3 charcters.",
       });
     }
     if (!email || !validation.validateEmail(email)) {
-      return res.status(400).json({ error: "Invalid email address!" });
+      return res.status(400).json({ message: "Invalid email address!" });
     } else {
       const input_user = await User.findOne({ email });
       if (input_user) {
-        return res.status(400).json({ error: "Email already exists!" });
+        return res.status(400).json({ message: "Email already exists!" });
       }
     }
     if (!validation.validatePassword(password, 8, 20)) {
       return res.status(400).json({
-        error:
+        message:
           "At least 8 charcter one uppercase and one number and containing one from: @#$&",
       });
     }
     if (password !== confirmPassword) {
       return res.status(400).json({ message: "passwords not match" });
     }
-    if (!filename || !validation.validateImage(filename)) {
-      return res.status(400).json({ error: "Invalid image file!" });
+    if (!image ) {
+      return res.status(400).json({ message: "Invalid image file!" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
+    const url = `${req.protocol}://${req.get("host")}`;
     const user = new User({
       email: email,
       password: hashedPassword,
       firstname: firstname,
       lastname: lastname,
-      image: filename,
+      image:`${url}/uploads/${image}`,
       role: "user",
     });
     const newUser = await user.save();
     const token = jwt.sign({ id: newUser._id }, config.TOKEN_KEY);
-    res.json({ newUser, token });
+    res.json({
+      redirectUrl: '/users',
+      message: "Login successful user.", 
+      token:token,
+      user_id:newUser._id
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred");
@@ -160,7 +167,8 @@ const Adminloggedin = async (req, res) => {
     res.json({
       redirectUrl: '/admins',
       message: "Login successful admin.", 
-      token:token
+      token:token,
+      admin_id:user._id
     });
   } else {
     return res.status(403).json({message:"not admin"});
@@ -190,8 +198,9 @@ const Userloggedin = async (req, res) => {
     const token = jwt.sign({ id: user._id }, config.TOKEN_KEY);
     res.json({
       redirectUrl: '/users',
-      message: "Login successful admin.", 
-      token:token
+      message: "Login successful user.", 
+      token:token,
+      user_id:user._id
     });
   } else {
     return res.status(403).json({message:"not user"});

@@ -13,6 +13,11 @@ import Presentation from "layouts/pages/presentation";
 
 // Material Kit 2 React routes
 import routes from "routes";
+import AdminLogin from "./ourcomponents/AdminLogin/AdminLogin";
+import Adminpage from "ourcomponents/AdminLogin/Adminpage";
+import UserLogin from "./ourcomponents/UserLogin/UserLogin";
+import Userpage from "ourcomponents/UserLogin/Userpage";
+import UserRegister from "./ourcomponents/registeration/UserRegister";
 
 // Components
 import Home from "./components/Home/home.jsx";
@@ -53,6 +58,11 @@ export default function App() {
         <Route path="/all" element={<All />} />
         <Route path="/presentation" element={<Presentation />} />
         <Route path="*" element={<Navigate to="/presentation" />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admins" element={<Adminpage />} />
+        <Route path="/user" element={<UserLogin />} />
+        <Route path="/users" element={<Userpage />} />
+        <Route path="/register" element={<UserRegister />} />
       </Routes>
     </ThemeProvider>
   );
