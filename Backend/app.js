@@ -6,9 +6,12 @@ require("./config/database").connect();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const app = express();
+const usercontroller = require("./Controllers/Users/user.controller");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 const multer = require("multer");
 const userRouter = require("./Routes/User");
-const usercontroller = require("./Controllers/Users/user.controller");
+const usercontroller = require("./Controllers/Users/User");
 const morgan = require("morgan");
 const auhorRouter = require("./Routes/author-routes");
 const auth = require("./middleware/auth");
@@ -29,7 +32,7 @@ app.use("/uploads", express.static("uploads"));
 
 //  show logs in development environment
 app.use(morgan("dev"));
-
+app.use(cors());
 app.use(express.json());
 
 // app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,14 +43,14 @@ app.post("/register", upload.single("image"), usercontroller.registeration);
 
 app.post("/Adminlogin", usercontroller.Adminloggedin);
 app.post("/Userlogin", usercontroller.Userloggedin);
+app.post("/register", usercontroller.registeration);
+app.post("/login", usercontroller.loggedin);
 app.use("/users", auth, userRouter);
 // app.use("/users", userRouter);
 app.use("/books", bookRouter);
 app.use("/rates", rateRouter);
 app.use("/categories", categoryRouter);
 app.use("/admins", ISADMIN, userRouter);
-
-// author resource routes
 app.use("/api/v1/authors", auhorRouter);
 
 module.exports = app;
