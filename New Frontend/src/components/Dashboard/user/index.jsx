@@ -5,16 +5,18 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-// import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import MKBox from "components/MKBox";
-// import routes from "routes";
-// import UserLogin from "../../user Login/userLogin.jsx";
+import routes from "routes";
+import UserLogin from "../../user Login/userLogin.jsx";
 import footerRoutes from "footer.routes";
+
 import Data from "./allread.jsx";
 // import Card from "@mui/material/Card";
-
+import bgImage from "assets/images/user/Dashboard/main.jpg";
 import "./index.css";
+import MKTypography from "components/MKTypography";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -60,7 +62,7 @@ export default function index() {
 
   return (
     <>
-      {/* <DefaultNavbar
+      <DefaultNavbar
         className="nav"
         routes={routes}
         action={{
@@ -70,8 +72,24 @@ export default function index() {
           label: "Login",
           color: "info",
         }}
-        fixed
-      /> */}
+        sticky
+      />
+
+      <MKBox
+        minHeight="75vh"
+        width="100%"
+        sx={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "top",
+          display: "grid",
+          placeItems: "center",
+        }}
+      ></MKBox>
+      <MKTypography variant="h1" className="heading">
+        User Dashboard
+      </MKTypography>
+
       <Container className="tabs">
         <Box sx={{ width: "100%" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -83,13 +101,16 @@ export default function index() {
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            <Data />
+            <Data filter="All" />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            Item Two
+            <Data filter="Read" />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            Item Three
+            <Data filter="Reading" />
+          </TabPanel>
+          <TabPanel value={value} index={3}>
+            <Data filter="Want to read" />
           </TabPanel>
         </Box>
         <MKBox pt={6} px={1} mt={6}>

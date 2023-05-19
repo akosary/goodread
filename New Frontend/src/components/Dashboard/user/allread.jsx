@@ -1,34 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import Table from "./userTable.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchApiData, updateRateOrStatus } from "Redux/userdashboard/slice";
 
-export default function allread() {
-  const [data, setData] = useState([]);
-  const baseURL = "http://127.0.0.1:3500";
-  const nestedRoute = "/rates";
+export default function allread({ filter }) {
+  const dispatch = useDispatch();
+  const { data, isLoading, error } = useSelector((state) => state.userDashboard);
+  const Rows = ["Book Name", "Author", "Rate", "Average Ratting", "Status"];
+
+  const handleDataReceived = (data) => {
+    dispatch(updateRateOrStatus(data));
+  };
+  const handleStatusData = (data) => {
+    dispatch(updateRateOrStatus(data));
+  };
+
+  // const updateDashboard = (data) => {
+  //   dispatch(updateRateOrStatus(data));
+  // };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    dispatch(fetchApiData());
+  }, [dispatch]);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`${baseURL}${nestedRoute}`);
-      const data = await response.json();
-      console.log(data);
-      setData(data);
-    } catch (err) {
-      console.log(`${baseURL}${nestedRoute}`);
-      console.log(err);
-    }
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <>
-      <h1>API Data:</h1>
-      <ul>
-        {data.map((item) => {
-          return <li key={item._id}>{item.book}</li>;
-        })}
-      </ul>
+      <Table
+        DData={data}
+        rows={Rows}
+        filter={filter}
+        onDataReceived={handleDataReceived}
+        statusData={handleStatusData}
+      />
     </>
   );
 }

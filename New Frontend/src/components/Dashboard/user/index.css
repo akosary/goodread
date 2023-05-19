@@ -1,8 +1,9 @@
 .tabs {
-  margin-top: 15vh;
+  margin-top: 5vh;
 }
-
-.nav {
-  position: absolute;
-  /* position: relative; */
+.heading {
+  text-align: center;
+  text-justify: auto;
+  margin-bottom: 3vh;
+  margin-top: 3vh;
 }
