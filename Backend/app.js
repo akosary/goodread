@@ -7,6 +7,9 @@ const userRouter = require("./Routes/users_example");
 const auhorRouter = require("./Routes/author-routes");
 const auth = require("./middleware/auth");
 
+// serving the static uploads directory
+app.use("/uploads", express.static("uploads"));
+
 //  show logs in development environment
 app.use(morgan("dev"));
 
