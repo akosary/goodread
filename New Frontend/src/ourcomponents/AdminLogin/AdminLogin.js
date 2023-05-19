@@ -50,6 +50,7 @@ function LoginPage() {
         if (token && data.message) {
           window.alert(data.message);
           localStorage.setItem("authToken", token);
+          localStorage.setItem("user_id", data.admin_id);
           if (data.redirectUrl) {
             window.location.href = data.redirectUrl;
           }
@@ -91,7 +92,7 @@ function LoginPage() {
             <Card>
               <MKBox
                 variant="gradient"
-                bgColor="info"
+                bgColor="dark"
                 borderRadius="lg"
                 coloredShadow="info"
                 mx={2}
@@ -127,7 +128,7 @@ function LoginPage() {
                   </MKBox>
                   {errors.password && <p className="text-danger fs-6"> {errors.password}</p>}
                   <MKBox mt={4} mb={1}>
-                    <MKButton variant="gradient" color="info" fullWidth type="submit">
+                    <MKButton variant="gradient" color="dark" fullWidth type="submit">
                       sign in
                     </MKButton>
                   </MKBox>

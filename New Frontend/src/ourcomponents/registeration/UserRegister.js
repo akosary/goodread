@@ -5,15 +5,15 @@ import MKBox from "../../components/MKBox";
 import MKTypography from "../../components/MKTypography";
 import MKInput from "../../components/MKInput";
 import MKButton from "../../components/MKButton";
-import bgImage from "../../assets/images/bg-sign-in-basic.jpeg";
+import bgImage from "../../assets/images/image.jpg";
 import SimpleFooter from "../../examples/Footers/SimpleFooter";
 function LoginPage() {
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
+  const [firstname, setFname] = useState("");
+  const [lastname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [retypePassword, setRetypePassword] = useState("");
-  const [filename, setFilename] = useState("");
+  const [confirmPassword, setRetypePassword] = useState("");
+  const [image, setFilename] = useState(null);
   const [errors, setErrors] = useState({});
 
   const handleFnameChange = (event) => {
@@ -33,17 +33,21 @@ function LoginPage() {
     setRetypePassword(event.target.value);
   };
   const handleFilenameChange = (event) => {
-    setFilename(event.target.value);
+    setFilename(event.target.files[0]);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const validationErrors = {};
-    if (!fname) {
-      validationErrors.fname = "First name is required";
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput) {
+      fileInput.value = "";
     }
-    if (!lname) {
-      validationErrors.lname = "Last name is required";
+    const validationErrors = {};
+    if (!firstname) {
+      validationErrors.firstname = "First name is required";
+    }
+    if (!lastname) {
+      validationErrors.lastname = "Last name is required";
     }
     if (!email) {
       validationErrors.email = "Email is required";
@@ -51,27 +55,27 @@ function LoginPage() {
     if (!password) {
       validationErrors.password = "Password is required";
     }
-    if (!retypePassword) {
-      validationErrors.retypePassword = "retype Password !!";
+    if (!confirmPassword) {
+      validationErrors.confirmPassword = "retype Password !!";
     }
-    if (!filename) {
-      validationErrors.filename = "image is required";
+    if (!image) {
+      validationErrors.image = "image is required";
     }
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
     const formData = new FormData();
-    formData.append("file", filename);
+    formData.append("image", image);
     const data = {
-      firstname: fname,
-      lastname: lname,
+      firstname: firstname,
+      lastname: lastname,
       email: email,
       password: password,
-      confirmPassword: retypePassword,
-      filename: formData,
+      confirmPassword: confirmPassword,
+      image: formData.get("image"),
     };
-    console.log(data);
+    console.log(data.image);
     fetch("http://127.0.0.1:3500/register", {
       method: "POST",
       headers: {
@@ -86,6 +90,7 @@ function LoginPage() {
         if (token && data.message) {
           window.alert(data.message);
           localStorage.setItem("authToken", token);
+          localStorage.setItem("user_id", data.user_id);
           if (data.redirectUrl) {
             window.location.href = data.redirectUrl;
           }
@@ -124,9 +129,9 @@ function LoginPage() {
             <Card>
               <MKBox
                 variant="gradient"
-                bgColor="info"
+                bgColor="dark"
                 borderRadius="lg"
-                coloredShadow="info"
+                coloredShadow="dark"
                 mx={2}
                 mt={-3}
                 p={2}
@@ -142,39 +147,48 @@ function LoginPage() {
                   component="form"
                   role="form"
                   onSubmit={handleSubmit}
-                  enctype="multipart/form-data"
+                  encType="multipart/form-data"
                 >
                   <MKBox mb={2}>
                     <MKInput
+                      variant="standard"
+                      InputLabelProps={{ shrink: true }}
                       type="text"
+                      name="firstname"
                       label="First Name"
                       fullWidth
-                      value={fname}
+                      value={firstname}
                       onChange={handleFnameChange}
                     />
                   </MKBox>
-                  {errors.fname && (
+                  {errors.firstname && (
                     <MKTypography className="text-danger" variant="inherit">
-                      {errors.fname}
+                      {errors.firstname}
                     </MKTypography>
                   )}
                   <MKBox mb={2}>
                     <MKInput
+                      variant="standard"
+                      InputLabelProps={{ shrink: true }}
                       type="text"
+                      name="lastname"
                       label="Last Name"
                       fullWidth
-                      value={lname}
+                      value={lastname}
                       onChange={handleLnameChange}
                     />
                   </MKBox>
-                  {errors.lname && (
+                  {errors.lastname && (
                     <MKTypography className="text-danger" variant="inherit">
-                      {errors.lname}
+                      {errors.lastname}
                     </MKTypography>
                   )}
-                  <MKBox MB={2} mt={2}>
+                  <MKBox mb={2} mt={2}>
                     <MKInput
+                      variant="standard"
+                      InputLabelProps={{ shrink: true }}
                       type="email"
+                      name="email"
                       label="Email"
                       fullWidth
                       value={email}
@@ -188,7 +202,10 @@ function LoginPage() {
                   )}
                   <MKBox mb={2} mt={2}>
                     <MKInput
+                      variant="standard"
+                      InputLabelProps={{ shrink: true }}
                       type="password"
+                      name="password"
                       label="Password"
                       fullWidth
                       value={password}
@@ -202,36 +219,44 @@ function LoginPage() {
                   )}
                   <MKBox mb={2} mt={2}>
                     <MKInput
+                      variant="standard"
+                      InputLabelProps={{ shrink: true }}
                       type="password"
+                      name="confirmPassword"
                       label="Retype Password"
                       fullWidth
-                      value={retypePassword}
+                      value={confirmPassword}
                       onChange={handleRetypePasswordChange}
                     />
                   </MKBox>
-                  {errors.retypePassword && (
+                  {errors.confirmPassword && (
                     <MKTypography className="text-danger" variant="inherit">
-                      {errors.retypePassword}
+                      {errors.confirmPassword}
                     </MKTypography>
                   )}
                   <MKBox mb={2} mt={2}>
-                    <MKTypography variant="subtitle2" fontWeight="light" color="dark" mt={1}>
+                    {/* <MKTypography variant="subtitle2" fontWeight="light" color="dark" mt={1}>
                       upload image
-                    </MKTypography>
+                    </MKTypography> */}
                     <MKInput
+                      variant="standard"
+                      InputLabelProps={{ shrink: true }}
+                      label="Upload Image"
                       type="file"
+                      name="image"
                       fullWidth
-                      value={filename}
+                      // value={image}
+                      id="fileInput"
                       onChange={handleFilenameChange}
                     />
                   </MKBox>
-                  {errors.filename && (
+                  {errors.image && (
                     <MKTypography className="text-danger" variant="inherit">
-                      {errors.filename}
+                      {errors.image}
                     </MKTypography>
                   )}
                   <MKBox mt={4} mb={1}>
-                    <MKButton variant="gradient" color="info" fullWidth type="submit">
+                    <MKButton variant="gradient" color="dark" fullWidth type="submit">
                       submit
                     </MKButton>
                   </MKBox>

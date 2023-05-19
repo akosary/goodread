@@ -83,9 +83,10 @@ const remove = async (req, res) => {
 // registration and logging
 const registeration = async (req, res) => {
   try {
-    // res.setHeader("Content-Type", "multipart/form-data");
-    const { firstname, lastname, email, password, confirmPassword, filename } =
-      req.body;
+    res.setHeader("Content-Type", "multipart/form-data");
+    const { firstname, lastname, email, password, confirmPassword } =req.body;
+    const image=req.file;
+    console.log(image);
     if (!validation.validateInput(firstname, 3, 100)) {
       return res.status(400).json({
         message:
@@ -115,7 +116,7 @@ const registeration = async (req, res) => {
     if (password !== confirmPassword) {
       return res.status(400).json({ message: "passwords not match" });
     }
-    if (!filename || !validation.validateImage(filename)) {
+    if (!image ) {
       return res.status(400).json({ message: "Invalid image file!" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -124,7 +125,7 @@ const registeration = async (req, res) => {
       password: hashedPassword,
       firstname: firstname,
       lastname: lastname,
-      image: filename,
+      image: image,
       role: "user",
     });
     const newUser = await user.save();
@@ -132,7 +133,8 @@ const registeration = async (req, res) => {
     res.json({
       redirectUrl: '/users',
       message: "Login successful user.", 
-      token:token
+      token:token,
+      user_id:newUser._id
     });
   } catch (error) {
     console.error(error);
@@ -164,7 +166,8 @@ const Adminloggedin = async (req, res) => {
     res.json({
       redirectUrl: '/admins',
       message: "Login successful admin.", 
-      token:token
+      token:token,
+      admin_id:user._id
     });
   } else {
     return res.status(403).json({message:"not admin"});
@@ -194,8 +197,9 @@ const Userloggedin = async (req, res) => {
     const token = jwt.sign({ id: user._id }, config.TOKEN_KEY);
     res.json({
       redirectUrl: '/users',
-      message: "Login successful admin.", 
-      token:token
+      message: "Login successful user.", 
+      token:token,
+      user_id:user._id
     });
   } else {
     return res.status(403).json({message:"not user"});
