@@ -1,5 +1,4 @@
 const Author = require("../models/author-model");
-
 const APIFeatures = require("../utils/api-features");
 
 exports.getAllAuthors = async (req, res) => {
@@ -10,7 +9,7 @@ exports.getAllAuthors = async (req, res) => {
       .sort()
       .limitFields()
       .paginate();
-    
+
     // EXECUTE QUERY
     const authors = await features.query;
 
@@ -50,12 +49,18 @@ exports.getAuthor = async (req, res) => {
 
 exports.creatAuthor = async (req, res) => {
   try {
-    const newAuthor = await Author.create(req.body);
-
+    const url = `${req.protocol}://${req.get("host")}`;
+    const author = new Author({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      dateOfBirth: req.body.dateOfBirth,
+      image: `${url}/uploads/${req.file.filename}`,
+    });
+    await author.save();
     res.status(201).json({
       status: "success",
       data: {
-        author: newAuthor,
+        author,
       },
     });
   } catch (err) {

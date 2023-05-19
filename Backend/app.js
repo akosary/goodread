@@ -23,7 +23,10 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+
+// serving the static uploads directory
 app.use("/uploads", express.static("uploads"));
+
 //  show logs in development environment
 app.use(morgan("dev"));
 
