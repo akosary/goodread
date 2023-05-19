@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     match: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
   },
   password: { type: String, required: true },
-  image: { type: Object },
+  image: { type: Object,required:true },
   role: { type: String, required: true },
 });
 

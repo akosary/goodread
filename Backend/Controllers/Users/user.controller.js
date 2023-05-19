@@ -85,7 +85,7 @@ const registeration = async (req, res) => {
   try {
     res.setHeader("Content-Type", "multipart/form-data");
     const { firstname, lastname, email, password, confirmPassword } =req.body;
-    const image=req.file;
+    const image=req.file.filename;
     console.log(image);
     if (!validation.validateInput(firstname, 3, 100)) {
       return res.status(400).json({
@@ -120,12 +120,13 @@ const registeration = async (req, res) => {
       return res.status(400).json({ message: "Invalid image file!" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
+    const url = `${req.protocol}://${req.get("host")}`;
     const user = new User({
       email: email,
       password: hashedPassword,
       firstname: firstname,
       lastname: lastname,
-      image: image,
+      image:`${url}/uploads/${image}`,
       role: "user",
     });
     const newUser = await user.save();
