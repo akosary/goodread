@@ -1,19 +1,19 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
-import { Table } from "react-bootstrap";
+// import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ModalForm from "./ModalForm";
-import {
-  addCategory,
-  deleteCategory,
-  editCategory,
-  findAll,
-} from "../../redux/asyncThunk";
-import { deleteMessage } from "../../redux/categorySlice";
+import { addCategory, deleteCategory, editCategory, findAll } from "Redux/asyncThunk";
+import { deleteMessage } from "Redux/categorySlice";
 import MKAlert from "components/MKAlert";
+import { TableContainer, TableRow } from "@mui/material";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import Paper from "@mui/material/Paper";
+
 export default function AllCategories() {
-  const categories = useSelector((state) => state.category);
-  const message = useSelector((state) => state.message);
+  const categories = useSelector((state) => state.categorySlice.category);
+  const message = useSelector((state) => state.categorySlice.message);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(findAll());
@@ -31,58 +31,66 @@ export default function AllCategories() {
   const handelDeleteCategory = (_id) => {
     dispatch(deleteCategory(_id));
     dispatch(findAll());
-    setTimeout(() => {
-      dispatch(deleteMessage());
-    }, 5000);
+    setTimeout(() => dispatch(deleteMessage()), 5000);
   };
 
   return (
     <div className="container">
       <ModalForm
         content={<i className="bi bi-plus-square"></i>}
-        styleBtn={"btn btn-primary"}
+        styleBtn={"info"}
         status={"Add Category"}
         handleSubmit={handleSubmit}
         categoryName=""
       />
       {message && <MKAlert color="success">{message}</MKAlert>}
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categories &&
-            categories.map((category, index) => (
-              <tr key={category._id} style={{ height: "60px" }}>
-                <td>{index + 1}</td>
-                <td>{category.name}</td>
-                <td className="d-flex justify-content-around">
-                  <ModalForm
-                    content={<i className="btn btn-warning bi bi-pencil"></i>}
-                    styleBtn={""}
-                    status={"Edit Category"}
-                    handleSubmit={handleSubmit}
-                    categoryName={category.name}
-                    _id={category._id}
-                  />
-                  <ModalForm
-                    content={<i className="btn btn-danger bi bi-trash3"></i>}
-                    styleBtn={""}
-                    status={"Delete Category"}
-                    handleSubmit={handleSubmit}
-                    _id={category._id}
-                    delete={1}
-                    deleteCategory={handelDeleteCategory}
-                  />
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </Table>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableRow>
+            <TableCell align="center" className="bold">
+              ID
+            </TableCell>
+            <TableCell align="center" className="bold">
+              Category Name
+            </TableCell>
+            <TableCell align="center" className="bold">
+              Actions
+            </TableCell>
+          </TableRow>
+          <TableBody>
+            {categories &&
+              categories.map((category, index) => (
+                <TableRow
+                  key={category._id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  {/* <tr  style={{ height: "60px" }}> */}
+                  <TableCell align="center">{index + 1}</TableCell>
+                  <TableCell align="center">{category.name}</TableCell>
+                  <TableCell className="d-flex justify-content-around">
+                    <ModalForm
+                      content={<i className="bi bi-pencil"></i>}
+                      styleBtn={"warning"}
+                      status={"Edit Category"}
+                      handleSubmit={handleSubmit}
+                      categoryName={category.name}
+                      _id={category._id}
+                    />
+                    <ModalForm
+                      content={<i className="bi bi-trash3"></i>}
+                      styleBtn={"error"}
+                      status={"Delete Category"}
+                      handleSubmit={handleSubmit}
+                      _id={category._id}
+                      delete={1}
+                      deleteCategory={handelDeleteCategory}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }

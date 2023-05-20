@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  rate: { type: Number, required: true },
+  rate: { type: Number },
+  status: {
+    type: String,
+    enum: ["Want to read", "Reading", "Read"],
+    default: "Want to read",
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

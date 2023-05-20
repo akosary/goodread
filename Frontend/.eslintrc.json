@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "no-unused-vars": "off",
+    "no-undef": "off"
+    // Add more rule overrides here as needed
+  }
+}

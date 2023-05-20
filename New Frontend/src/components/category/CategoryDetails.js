@@ -1,21 +1,19 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// 64662883ed840c1c83c05822
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { categoryDetails, popular } from "../../redux/asyncThunk";
+import { categoryDetails } from "../../Redux/asyncThunk";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import mainImage from "assets/images/main.jpg";
 import { Grid } from "@mui/material";
 import BackgroundBlogCard from "examples/Cards/BlogCards/BackgroundBlogCard";
 export default function CategoryDetails() {
-  const categoryBooks = useSelector((state) => state.categoryBooks);
+  const categoryBooks = useSelector((state) => state.categorySlice.categoryBooks);
   const dispatch = useDispatch();
   const { id } = useParams();
   useEffect(() => {
     dispatch(categoryDetails(id));
-    // dispatch(popular());
-  }, []);
+    console.log(categoryBooks);
+  }, [dispatch]);
   return (
     <Container className="mt-5">
       {categoryBooks[0] && (

@@ -1,16 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
-import { Card, Container, ListGroup } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { findAll } from "../../redux/asyncThunk";
+import { findAll } from "../../Redux/asyncThunk";
 import MKButton from "components/MKButton";
 import MKBox from "components/MKBox";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
-import MKTypography from "components/MKTypography";
+import categoriesImage from "assets/images/categories.jpg";
 import { Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function Categories() {
-  const categories = useSelector((state) => state.category);
+  const navigate = useNavigate();
+  const categories = useSelector((state) => state.categorySlice.category);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(findAll());
@@ -25,13 +27,10 @@ export default function Categories() {
         width="100%"
         minHeight="100vh"
         sx={{
-          backgroundImage: ({
-            functions: { linearGradient, rgba },
-            palette: { gradients },
-          }) =>
+          backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
             `${linearGradient(
               rgba(gradients.dark.main, 0.6),
-              rgba(gradients.dark.state, 0.6),
+              rgba(gradients.dark.state, 0.6)
             )}, url(${bgImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -49,7 +48,7 @@ export default function Categories() {
                   color="info"
                   className="col-4"
                   onClick={() => {
-                    console.log(category._id);
+                    navigate(`/categories/${category._id}/books`);
                   }}
                 >
                   {category.name}
