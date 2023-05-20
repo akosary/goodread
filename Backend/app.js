@@ -18,7 +18,7 @@ const ISADMIN = require("./middleware/IsAdmin");
 const categoryRouter = require("./Routes/categories.routes");
 const upload = require("./utils/multer-upload");
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: 'http://localhost:3001'
   }));
 app.use(bodyParser.json());
 app.use("/uploads", express.static("uploads"));

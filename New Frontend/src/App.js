@@ -33,6 +33,9 @@ import Adminpage from "ourcomponents/AdminLogin/Adminpage";
 import UserLogin from "./ourcomponents/UserLogin/UserLogin";
 import Userpage from "ourcomponents/UserLogin/Userpage";
 import UserRegister from "./ourcomponents/registeration/UserRegister";
+import Book from "./components/Book";
+import BookForm from "./components/BookForm";
+import BookAdmin from "./components/bookAdmin";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -68,6 +71,9 @@ export default function App() {
         <Route path="/user" element={<UserLogin />} />
         <Route path="/users" element={<Userpage />} />
         <Route path="/register" element={<UserRegister />} />
+        <Route path="/book" element={<Book />} />
+        <Route path="/bookAdmin" element={<BookAdmin />} />
+        <Route path="books/:id/edit" element={<BookForm />} />
       </Routes>
     </ThemeProvider>
   );
