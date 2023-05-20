@@ -58,6 +58,7 @@ export const extraReducers = (builder) => {
     });
   builder
     .addCase(categoryDetails.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.loading = false;
       state.categoryBooks = action.payload;
     })

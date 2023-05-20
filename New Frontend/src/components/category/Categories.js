@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,8 +7,10 @@ import MKButton from "components/MKButton";
 import MKBox from "components/MKBox";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import { Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function Categories() {
+  const navigate = useNavigate();
   const categories = useSelector((state) => state.category);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -44,7 +47,7 @@ export default function Categories() {
                   color="info"
                   className="col-4"
                   onClick={() => {
-                    console.log(category._id);
+                    navigate(`/categories/${category._id}/books`);
                   }}
                 >
                   {category.name}

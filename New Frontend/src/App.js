@@ -61,6 +61,9 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/userDashboard" element={<UserDashboard />} />
         <Route path="/userLogin" element={<UserLogin />} />
+        <Route path="categories" Component={AllCategories} />
+        <Route path="categories/groups" Component={Categories} />
+        <Route path="categories/:id/books" Component={CategoryDetails} />
         <Route path="/all" element={<All />} />
         <Route path="/presentation" element={<Presentation />} />
         <Route path="/admin" element={<AdminLogin />} />
@@ -68,9 +71,6 @@ export default function App() {
         <Route path="/user" element={<UserLogin />} />
         <Route path="/users" element={<Userpage />} />
         <Route path="/register" element={<UserRegister />} />
-        <Route path="categories" Component={AllCategories} />
-        <Route path="categories/groups" Component={Categories} />
-        <Route path="categories/:id/books" Component={CategoryDetails} />
         <Route path="*" element={<Navigate to="/presentation" />} />
       </Routes>
     </ThemeProvider>

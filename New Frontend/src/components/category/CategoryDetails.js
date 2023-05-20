@@ -1,4 +1,3 @@
-// 64662883ed840c1c83c05822
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { categoryDetails } from "../../redux/asyncThunk";
@@ -13,8 +12,8 @@ export default function CategoryDetails() {
   const { id } = useParams();
   useEffect(() => {
     dispatch(categoryDetails(id));
-    // dispatch(popular());
-  }, []);
+    console.log(categoryBooks);
+  }, [dispatch]);
   return (
     <Container className="mt-5">
       {categoryBooks[0] && (

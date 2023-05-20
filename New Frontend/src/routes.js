@@ -68,6 +68,7 @@ import ProgressBars from "layouts/sections/elements/progress-bars";
 import Toggles from "layouts/sections/elements/toggles";
 import Typography from "layouts/sections/elements/typography";
 import Home from "./components/Home/home.jsx";
+import AllCategories from "components/category/AllCategories.js";
 
 const routes = [
   {
@@ -80,7 +81,7 @@ const routes = [
     name: "Categories",
     icon: <Icon>category</Icon>,
     route: "/categories",
-    component: <Home />,
+    component: <AllCategories />,
   },
   {
     name: "Authors",
