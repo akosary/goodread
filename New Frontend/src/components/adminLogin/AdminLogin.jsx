@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import MKBox from "../MKBox";
+import MKBox from "..//MKBox";
 import MKTypography from "../MKTypography";
-import MKInput from "..//MKInput";
+import MKInput from "../MKInput";
 import MKButton from "../MKButton";
-import bgImage from "../../assets/images/image.jpg";
+import bgImage from "../../assets/images/bg-sign-in-basic.jpeg";
 import SimpleFooter from "../../examples/Footers/SimpleFooter";
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -38,7 +37,7 @@ function LoginPage() {
       email: username,
       password: password,
     };
-    fetch("http://127.0.0.1:3500/Userlogin", {
+    fetch("http://127.0.0.1:3500/Adminlogin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +50,7 @@ function LoginPage() {
         if (token && data.message) {
           window.alert(data.message);
           localStorage.setItem("authToken", token);
-          localStorage.setItem("user_id", data.user_id);
+          localStorage.setItem("user_id", data.admin_id);
           if (data.redirectUrl) {
             window.location.href = data.redirectUrl;
           }
@@ -87,6 +86,9 @@ function LoginPage() {
       <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
         <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%">
           <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
+            <MKTypography variant="h3" mb={6} color="white" width="100%">
+              Welcome To Admin Panel
+            </MKTypography>
             <Card>
               <MKBox
                 variant="gradient"
@@ -100,7 +102,7 @@ function LoginPage() {
                 textAlign="center"
               >
                 <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-                  login
+                  Sign in
                 </MKTypography>
               </MKBox>
               <MKBox pt={4} pb={3} px={3}>
@@ -127,23 +129,8 @@ function LoginPage() {
                   {errors.password && <p className="text-danger fs-6"> {errors.password}</p>}
                   <MKBox mt={4} mb={1}>
                     <MKButton variant="gradient" color="dark" fullWidth type="submit">
-                      login
+                      sign in
                     </MKButton>
-                  </MKBox>
-                  <MKBox mt={3} mb={1} textAlign="center">
-                    <MKTypography variant="button" color="text">
-                      Don&apos;t have an account?{" "}
-                      <MKTypography
-                        component={Link}
-                        to="/register"
-                        variant="button"
-                        color="dark"
-                        fontWeight="medium"
-                        textGradient
-                      >
-                        Sign up
-                      </MKTypography>
-                    </MKTypography>
                   </MKBox>
                 </MKBox>
               </MKBox>

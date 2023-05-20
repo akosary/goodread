@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 const app = express();
 const multer = require("multer");
 const userRouter = require("./Routes/User");
-// const usercontroller = require("./Controllers/Users/user.controller");
+const usercontroller = require("./Controllers/Users/user.controller");
 const morgan = require("morgan");
 const auhorRouter = require("./Routes/author-routes");
 // const bookRouter = require("./Routes/book-routes");
@@ -37,11 +37,10 @@ app.use(express.json());
 // const upload = multer({ dest: 'uploads/' , limits: {
 //   fileSize: 1024 * 1024 * 5, // 5MB
 // },});
-// app.post("/register", upload.single("image"), usercontroller.registeration);
+app.post("/register", upload.single("image"), usercontroller.registeration);
 
-// app.post("/Adminlogin", usercontroller.Adminloggedin);
-// app.post("/Userlogin", usercontroller.Userloggedin);
-// app.post("/register", usercontroller.registeration);
+app.post("/Adminlogin", usercontroller.Adminloggedin);
+app.post("/Userlogin", usercontroller.Userloggedin);
 // app.post("/login", usercontroller.loggedin);
 app.use("/users", auth, userRouter);
 // app.use("/users", userRouter);

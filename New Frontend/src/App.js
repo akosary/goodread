@@ -13,15 +13,15 @@ import Presentation from "layouts/pages/presentation";
 
 // Material Kit 2 React routes
 import routes from "routes";
-import AdminLogin from "./ourcomponents/AdminLogin/AdminLogin";
 import Adminpage from "ourcomponents/AdminLogin/Adminpage";
 // import UserLogin from "./ourcomponents/UserLogin/UserLogin";
 import Userpage from "ourcomponents/UserLogin/Userpage";
-import UserRegister from "./ourcomponents/registeration/UserRegister";
 
 // Components
 import Home from "./components/Home/home.jsx";
 import UserLogin from "./components/user Login/userLogin.jsx";
+import AdminLogin from "./components/adminLogin/AdminLogin";
+import UserRegister from "./components/registeration/UserRegister";
 import UserDashboard from "./components/Dashboard/user/index.jsx";
 import All from "./components/Dashboard/user/allread.jsx";
 import AllCategories from "components/category/AllCategories";
