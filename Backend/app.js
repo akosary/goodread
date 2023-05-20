@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const app = express();
 const userRouter = require("./Routes/users_example");
 const auhorRouter = require("./Routes/author-routes");
+const bookRouter = require("./Routes/book-routes");
 const auth = require("./middleware/auth");
 
 // serving the static uploads directory
@@ -19,6 +20,9 @@ app.use(express.json());
 
 // author resource routes
 app.use("/api/v1/authors", auhorRouter);
+
+// book resource routes
+app.use("/api/v1/books", bookRouter);
 
 app.use("/users", auth, userRouter);
 

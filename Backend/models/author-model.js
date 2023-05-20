@@ -17,10 +17,12 @@ const authorSchema = new mongoose.Schema(
       type: Date,
       required: [true, "Author must have a date of birth"],
     },
-    book: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Book",
-    },
+    books: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Book",
+      },
+    ],
   },
   { timestamps: true }
 );
