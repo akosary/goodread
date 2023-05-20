@@ -6,14 +6,14 @@ import { Provider } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import store from "Redux/userdashboard/Store";
-import categoryStore from "redux/categoryStore";
+// import categoryStore from "Redux/categoryStore";
 const container = document.getElementById("root");
 
 // Create a root.
 const root = ReactDOMClient.createRoot(container);
 
 root.render(
-  <Provider store={(store, categoryStore)}>
+  <Provider store={store}>
     <BrowserRouter>
       <link
         rel="stylesheet"

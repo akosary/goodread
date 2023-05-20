@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { categoryDetails } from "../../redux/asyncThunk";
+import { categoryDetails } from "../../Redux/asyncThunk";
 import { useParams } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import mainImage from "assets/images/main.jpg";

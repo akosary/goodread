@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { findAll } from "../../redux/asyncThunk";
+import { findAll } from "../../Redux/asyncThunk";
 import MKButton from "components/MKButton";
 import MKBox from "components/MKBox";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";

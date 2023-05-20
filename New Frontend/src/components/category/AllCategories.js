@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ModalForm from "./ModalForm";
-import { addCategory, deleteCategory, editCategory, findAll } from "../../redux/asyncThunk";
-import { deleteMessage } from "../../redux/categorySlice";
+import { addCategory, deleteCategory, editCategory, findAll } from "../../Redux/asyncThunk";
+import { deleteMessage } from "../../Redux/categorySlice";
 import MKAlert from "components/MKAlert";
 export default function AllCategories() {
   const categories = useSelector((state) => state.category);
