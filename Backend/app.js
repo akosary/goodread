@@ -11,7 +11,7 @@ const userRouter = require("./Routes/User");
 // const usercontroller = require("./Controllers/Users/user.controller");
 const morgan = require("morgan");
 const auhorRouter = require("./Routes/author-routes");
-const bookRouter = require("./Routes/book-routes");
+// const bookRouter = require("./Routes/book-routes");
 const auth = require("./middleware/auth");
 const bookRouter = require("./Routes/bookRoute");
 const rateRouter = require("./Routes/rate.routes");
@@ -52,6 +52,6 @@ app.use("/admins", ISADMIN, userRouter);
 app.use("/api/v1/authors", auhorRouter);
 
 // book resource routes
-app.use("/api/v1/books", bookRouter);
+// app.use("/api/v1/books", bookRouter);
 
 module.exports = app;
