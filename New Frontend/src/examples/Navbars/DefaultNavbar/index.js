@@ -1,19 +1,3 @@
-/* eslint-disable no-param-reassign */
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { Fragment, useState, useEffect } from "react";
 
 // react-router components
@@ -508,7 +492,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                 <MKButton
                   component="a"
                   href={action.route}
-                  target="_blank"
+                  target="_self"
                   rel="noreferrer"
                   variant={
                     action.color === "white" || action.color === "default"
@@ -551,7 +535,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
 
 // Setting default values for the props of DefaultNavbar
 DefaultNavbar.defaultProps = {
-  brand: "Material Kit 2",
+  brand: "Good Read",
   transparent: false,
   light: false,
   action: false,

@@ -1,16 +1,18 @@
 const express = require("express");
 const Router = express.Router();
-const bookController = require('../Controllers/bookController')
-const bookMiddleware = require('../middleware/book')
+const bookController = require("../Controllers/bookController");
+const bookMiddleware = require("../middleware/book");
 
-Router.get("/", bookController.getBooks);
+// Router.get("/", bookController.getBooks);
 
-Router.post("/", bookController.createBook);
+// Router.post("/", bookController.createBook);
 
-Router.get("/:id", bookMiddleware.findBook,bookController.showBook);
+// Router.get("/:id", bookMiddleware.findBook, bookController.showBook);
 
-Router.delete("/:id",bookMiddleware.findBook, bookController.deleteBook);
+// Router.delete("/:id", bookMiddleware.findBook, bookController.deleteBook);
 
-Router.patch("/:id",bookMiddleware.findBook ,bookController.updateBook);
+Router.patch("/:id", bookMiddleware.findBook, bookController.updateBook);
 
-module.exports = Router
+Router.get("/popularBooks", bookController.popularBooks);
+
+module.exports = Router;

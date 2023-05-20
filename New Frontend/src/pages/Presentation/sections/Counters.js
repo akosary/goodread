@@ -1,18 +1,3 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -31,27 +16,27 @@ function Counters() {
         <Grid container item xs={12} lg={9} sx={{ mx: "auto" }}>
           <Grid item xs={12} md={4}>
             <DefaultCounterCard
-              count={70}
+              count={1000}
               suffix="+"
-              title="Coded Elements"
-              description="From buttons, to inputs, navbars, alerts or cards, you are covered"
+              title="Reader"
+              description="A lot of readers trusted the content of our website and our books "
             />
           </Grid>
           <Grid item xs={12} md={4} display="flex">
             <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, mx: 0 }} />
             <DefaultCounterCard
-              count={15}
+              count={8450}
               suffix="+"
-              title="Design Blocks"
-              description="Mix the sections, change the colors and unleash your creativity"
+              title="Book"
+              description="You can find your category and your interest here"
             />
             <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, ml: 0 }} />
           </Grid>
           <Grid item xs={12} md={4}>
             <DefaultCounterCard
-              count={4}
-              title="Pages"
-              description="Save 3-4 weeks of work when you use our pre-made pages for your website"
+              count={1400}
+              title="Authors"
+              description="A lot of authors trusted by us"
             />
           </Grid>
         </Grid>

@@ -1,3 +1,7 @@
+import { Provider } from "react-redux";
+import "./App.css";
+import CategoryRoutes from "./routes/CategoryRoutes";
+import categoryStore from "./redux/categoryStore";
 
 // import logo from './logo.svg';
 import Home from "./components/Home/home.jsx";
@@ -12,17 +16,14 @@ import UserLogin from './components/UserLogin/UserLogin';
 import Userpage from './components/UserLogin/Userpage';
 function App() {
   return (
-    <Fragment>
- 
-  <Routes>
-    <Route path='/' element={ <Navbar/>}/>
-    <Route path='/admin' element={ <AdminLogin/>}/>
-    <Route path='/admins' element={ <Adminpage/>}/>
-    <Route path='/user' element={ <UserLogin/>}/>
-    <Route path='/users' element={ <Userpage/>}/>
-    {/* <Route path='*' element={<Error/>}/> */}
-  </Routes>
-</Fragment>
-    
-)}
+    <>
+      <div className="container mt-5">
+        <Provider store={categoryStore}>
+          <CategoryRoutes />
+        </Provider>
+      </div>
+    </>
+  );
+}
+
 export default App;
