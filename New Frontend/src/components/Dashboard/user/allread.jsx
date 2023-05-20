@@ -36,7 +36,7 @@ export default function allread({ filter }) {
       <Table
         DData={data}
         rows={Rows}
-        filter={filter}
+        filter={filter || "All"}
         onDataReceived={handleDataReceived}
         statusData={handleStatusData}
       />
