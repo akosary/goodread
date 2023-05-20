@@ -66,22 +66,23 @@ function LoginPage() {
       return;
     }
     const formData = new FormData();
+    formData.append("firstname", firstname);
+    formData.append("lastname", lastname);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("confirmPassword", confirmPassword);
     formData.append("image", image);
-    const data = {
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword,
-      image: formData.get("image"),
-    };
-    console.log(data.image);
+    // const data = {
+    //   firstname: firstname,
+    //   lastname: lastname,
+    //   email: email,
+    //   password: password,
+    //   confirmPassword: confirmPassword,
+    //   image: formData.get("image"),
+    // };
     fetch("http://127.0.0.1:3500/register", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+      body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
