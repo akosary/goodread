@@ -1,4 +1,5 @@
 const Author = require("../models/author-model");
+const Book = require("../models/book-model");
 const APIFeatures = require("../utils/api-features");
 
 exports.getAllAuthors = async (req, res) => {
@@ -11,7 +12,7 @@ exports.getAllAuthors = async (req, res) => {
       .paginate();
 
     // EXECUTE QUERY
-    const authors = await features.query;
+    const authors = await features.query.populate("books");
 
     // SEND RESPONSE
     res.status(200).json({
@@ -32,7 +33,7 @@ exports.getAllAuthors = async (req, res) => {
 exports.getAuthor = async (req, res) => {
   try {
     const { id } = req.params;
-    const author = await Author.findById(id);
+    const author = await Author.findById(id).populate("books");
     res.status(200).json({
       status: "success",
       data: {
@@ -104,6 +105,70 @@ exports.deleteAuthor = async (req, res) => {
     res.status(400).json({
       status: "fail",
       message: "Invalid data sent",
+    });
+  }
+};
+
+// add book for specific author
+// /authors/:id/books   POST
+exports.addBookToAuthor = async (req, res) => {
+  try {
+    const url = `${req.protocol}://${req.get("host")}`;
+    console.log(url);
+    const authorId = req.params.id;
+    const author = await Author.findById(authorId);
+    if (!author) {
+      return res.status(404).send({
+        status: "fail",
+        message: "Aauthor not found",
+      });
+    }
+    const book = new Book({
+      title: req.body.title,
+      author: author._id,
+      coverImage: `${url}/uploads/${req.file.filename}`,
+    });
+    await book.save();
+    author.books.push(book._id);
+    await author.save();
+    res.status(201).json({
+      status: "success",
+      data: {
+        book,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      message: err,
+    });
+  }
+};
+
+// get books for specific author 'Must'
+// /authors/:id/books   GET
+exports.getAuthorBooks = async (req, res) => {
+  try {
+    const authorId = req.params.id;
+    const author = await Author.findById(authorId);
+    if (!author) {
+      return res.status(404).send({
+        status: "fail",
+        message: "Aauthor not found",
+      });
+    }
+    const books = await Book.find({ author: author._id });
+    res.status(200).json({
+      status: "success",
+      result: books.length,
+      data: {
+        books,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      message: err,
     });
   }
 };
