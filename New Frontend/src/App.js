@@ -16,6 +16,7 @@ import routes from "routes";
 import Adminpage from "ourcomponents/AdminLogin/Adminpage";
 // import UserLogin from "./ourcomponents/UserLogin/UserLogin";
 import Userpage from "ourcomponents/UserLogin/Userpage";
+<<<<<<< HEAD
 
 // Components
 import Home from "./components/Home/home.jsx";
@@ -29,6 +30,12 @@ import Categories from "components/category/Categories";
 import CategoryDetails from "components/category/CategoryDetails";
 // import { Provider } from "react-redux";
 // import categoryStore from "/src/Redux/categoryStore";
+=======
+import UserRegister from "./ourcomponents/registeration/UserRegister";
+import Book from "./components/Book";
+import BookForm from "./components/BookForm";
+import BookAdmin from "./components/bookAdmin";
+>>>>>>> 0e4dbf63532b2a4b9cb74e220db73e335cfef1d2
 
 export default function App() {
   const { pathname } = useLocation();
@@ -71,7 +78,13 @@ export default function App() {
         <Route path="/user" element={<UserLogin />} />
         <Route path="/users" element={<Userpage />} />
         <Route path="/register" element={<UserRegister />} />
+<<<<<<< HEAD
         <Route path="*" element={<Navigate to="/home" />} />
+=======
+        <Route path="/book" element={<Book />} />
+        <Route path="/bookAdmin" element={<BookAdmin />} />
+        <Route path="books/:id/edit" element={<BookForm />} />
+>>>>>>> 0e4dbf63532b2a4b9cb74e220db73e335cfef1d2
       </Routes>
     </ThemeProvider>
     // </Provider>

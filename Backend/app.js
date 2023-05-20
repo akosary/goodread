@@ -18,11 +18,13 @@ const rateRouter = require("./Routes/rate.routes");
 const ISADMIN = require("./middleware/IsAdmin");
 const categoryRouter = require("./Routes/categories.routes");
 const upload = require("./utils/multer-upload");
+
 app.use(
   cors({
     origin: "http://localhost:3000",
   })
 ); 
+
 app.use(bodyParser.json());
 
 // serving the static uploads directory
