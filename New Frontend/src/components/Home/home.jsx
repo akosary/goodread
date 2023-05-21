@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -25,15 +26,34 @@ import PopularBooks from "../popular/books/popularBooks.jsx";
 // Presentation page components
 import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
 
+// Images
+import bgImage from "assets/images/home/bg-book-5.jpg";
 // Routes
 import routes from "routes";
 import footerRoutes from "footer.routes";
 import UserLogin from "../user Login/userLogin.jsx";
-
-// Images
-import bgImage from "assets/images/home/bg-book-5.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { popularBooksSlice } from "Redux/home/popularBookSlice";
 
 function home() {
+  const { data, isLoading, error } = useSelector((state) => state.popularBooksSlice);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(popularBooksSlice());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+  if (!data) {
+    console.log(data);
+    return <div>Error: {error}</div>;
+  }
   return (
     <>
       <DefaultNavbar
@@ -98,7 +118,7 @@ function home() {
         }}
       >
         <Counters />
-        <PopularBooks />
+        <PopularBooks popularData={data} />
 
         {/* <Information /> */}
         {/* <DesignBlocks />

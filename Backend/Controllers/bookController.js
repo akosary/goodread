@@ -163,7 +163,6 @@ class bookController {
   }
 
   async popularBooks(req, res) {
-    console.log("popularBooks");
     try {
       const books = await rateModel.aggregate([
         { $group: { _id: "$book", averageRate: { $avg: "$rate" } } },
