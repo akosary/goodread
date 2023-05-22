@@ -36,7 +36,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { popularBooksSlice } from "Redux/home/popularBookSlice";
 
 function home() {
-  const { data, isLoading, error } = useSelector((state) => state.popularBooksSlice);
+  const { data, isLoading, error } = useSelector((state) => state.popularBookSlice);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,10 +48,6 @@ function home() {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
-  }
-  if (!data) {
-    console.log(data);
     return <div>Error: {error}</div>;
   }
   return (
@@ -118,14 +114,14 @@ function home() {
         }}
       >
         <Counters />
-        <PopularBooks popularData={data} />
+        {data != [] && <PopularBooks popularData={data} />}
 
         {/* <Information /> */}
         {/* <DesignBlocks />
         <Pages /> */}
-        <Container sx={{ mt: 6 }}>
+        {/* <Container sx={{ mt: 6 }}>
           <BuiltByDevelopers />
-        </Container>
+        </Container> */}
         {/* <Container>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={4}>

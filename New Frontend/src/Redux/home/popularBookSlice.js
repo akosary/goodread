@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const baseURL = "http://localhost:3500";
-const nestedRoute = "/popularBooksAndAuthor";
+const nestedRoute = "/books/popularBooksAndAuthor";
 
 export const popularBooksSlice = createAsyncThunk("popularBooksSection/popularBooks", async () => {
   try {
@@ -12,7 +12,7 @@ export const popularBooksSlice = createAsyncThunk("popularBooksSection/popularBo
   }
 });
 
-const apiDataSlice = createSlice({
+const popularBookSlice = createSlice({
   name: "popularBooksSection",
   initialState: {
     data: [],
@@ -37,4 +37,4 @@ const apiDataSlice = createSlice({
   },
 });
 
-export default apiDataSlice.reducer;
+export default popularBookSlice.reducer;
