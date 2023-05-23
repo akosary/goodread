@@ -2,9 +2,11 @@ const Rate = require("../../models/rate");
 const subscribers = {};
 
 const get = async (req, res) => {
-  const { user } = req.body;
+  const { user_id } = req.query;
+  // console.log(req);
+  console.log(user_id);
   try {
-    const rates = await Rate.where("user", user).populate([
+    const rates = await Rate.find({ user: user_id }).populate([
       {
         path: "book",
         populate: [

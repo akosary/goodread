@@ -1,9 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const url = "http://localhost:3500";
+const authToken = localStorage.getItem("authToken");
 
 export const findAll = createAsyncThunk("category/findAll", async () => {
-  return (await axios.get(`${url}/categories`)).data;
+  return (
+    await axios.get(`${url}/categories`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
+    })
+  ).data;
 });
 
 export const addCategory = createAsyncThunk("category/addCategory", async ({ name }) => {

@@ -23,7 +23,7 @@ app.use(
   cors({
     origin: "http://localhost:3000",
   })
-); 
+);
 
 app.use(bodyParser.json());
 
@@ -33,16 +33,16 @@ app.use("/uploads", express.static("uploads"));
 //  show logs in development environment
 app.use(morgan("dev"));
 app.use(cors());
-app.use(express.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb' ,extended: true }));
+app.use(express.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.post("/register", upload.single("image"), usercontroller.registeration);
 app.post("/Adminlogin", usercontroller.Adminloggedin);
 app.post("/Userlogin", usercontroller.Userloggedin);
 app.use("/users", auth, userRouter);
 // app.use("/users", userRouter);
 app.use("/books", bookRouter);
-app.use("/rates", rateRouter);
-app.use("/categories", categoryRouter);
+app.use("/rates", auth, rateRouter);
+app.use("/categories", auth, categoryRouter);
 app.use("/admins", ISADMIN, userRouter);
 app.use("/api/v1/authors", auhorRouter);
 

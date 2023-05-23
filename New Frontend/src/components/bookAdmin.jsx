@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MDBIcon, MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import { booksAPI } from "../Api/Book";
+import "./bookAdmin.css";
 export default function BookAdmin() {
   const navigate = useNavigate();
 

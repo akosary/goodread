@@ -9,9 +9,7 @@ import MKTypography from "components/MKTypography";
 import MKSocialButton from "components/MKSocialButton";
 
 // Material Kit 2 React examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
-import "./home.css";
+// import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
 
 // Presentation page sections
@@ -29,9 +27,8 @@ import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
 // Images
 import bgImage from "assets/images/home/bg-book-5.jpg";
 // Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
-import UserLogin from "components/user Login/userLogin.jsx";
+// import routes from "routes";
+// import UserLogin from "components/user Login/userLogin.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { popularBooksSlice } from "Redux/home/popularBookSlice";
 
@@ -52,17 +49,6 @@ function home() {
   }
   return (
     <>
-      <DefaultNavbar
-        routes={routes}
-        action={{
-          type: "internal",
-          route: "/userLogin",
-          component: <UserLogin />,
-          label: "Login",
-          color: "info",
-        }}
-        sticky
-      />
       <MKBox
         minHeight="75vh"
         width="100%"
@@ -215,9 +201,6 @@ function home() {
           </Container>
         </MKBox>
       </Card>
-      <MKBox pt={6} px={1} mt={6}>
-        <DefaultFooter content={footerRoutes} />
-      </MKBox>
     </>
   );
 }

@@ -6,6 +6,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import theme from "assets/theme";
 import Presentation from "layouts/pages/presentation";
 import routes from "routes";
+import userRoutes from "user.routes";
+import adminRoutes from "admin.routes";
 import Adminpage from "ourcomponents/AdminLogin/Adminpage";
 import Userpage from "ourcomponents/UserLogin/Userpage";
 import Home from "./components/Home/home.jsx";
@@ -13,14 +15,21 @@ import UserLogin from "./components/user Login/userLogin.jsx";
 import AdminLogin from "./components/adminLogin/AdminLogin";
 import UserRegister from "./components/registeration/UserRegister";
 import UserDashboard from "./components/Dashboard/user/index.jsx";
-import AllCategories from "components/category/AllCategories";
+// import AllCategories from "components/category/AllCategories";
 import Categories from "components/category/Categories";
 import CategoryDetails from "components/category/CategoryDetails";
 import Book from "./components/Book";
 import BookForm from "./components/BookForm";
 import BookAdmin from "./components/bookAdmin";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar/index.js";
+import MKBox from "components/MKBox";
+import DefaultFooter from "examples/Footers/DefaultFooter";
+import footerRoutes from "footer.routes";
 
 export default function App() {
+  const authToken = localStorage.getItem("authToken");
+  const role = localStorage.getItem("role");
+  // const user_id = localStorage.getItem("user_id");
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -41,13 +50,51 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      {authToken && role === "user" ? (
+        <DefaultNavbar
+          className="nav"
+          routes={userRoutes}
+          action={{
+            type: "internal",
+            route: "/",
+            label: "logout",
+            color: "error",
+          }}
+          sticky
+        />
+      ) : authToken && role === "admin" ? (
+        <DefaultNavbar
+          className="nav"
+          routes={adminRoutes}
+          action={{
+            type: "internal",
+            route: "/",
+            label: "logout",
+            color: "error",
+          }}
+          sticky
+        />
+      ) : (
+        <DefaultNavbar
+          className="nav"
+          routes={routes}
+          action={{
+            type: "internal",
+            route: "/userLogin",
+            component: <UserLogin />,
+            label: "login",
+            color: "info",
+          }}
+          sticky
+        />
+      )}
       <CssBaseline />
       <Routes>
         {getRoutes(routes)}
         <Route path="/" element={<Home />} />
         <Route path="/userDashboard" element={<UserDashboard />} />
         <Route path="/userLogin" element={<UserLogin />} />
-        <Route path="categories" Component={AllCategories} />
+        {/* <Route path="categories" Component={AllCategories} /> */}
         <Route path="categories/groups" Component={Categories} />
         <Route path="categories/:id/books" Component={CategoryDetails} />
         <Route path="/presentation" element={<Presentation />} />
@@ -61,6 +108,9 @@ export default function App() {
         <Route path="books/:id/edit" element={<BookForm />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      <MKBox mt={6}>
+        <DefaultFooter content={footerRoutes} />
+      </MKBox>
     </ThemeProvider>
   );
 }

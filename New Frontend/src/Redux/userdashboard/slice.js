@@ -1,21 +1,27 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const baseURL = "http://localhost:3500";
 const nestedRoute = "/rates";
+const authToken = localStorage.getItem("authToken");
+const user_id = localStorage.getItem("user_id");
+const queryParams = new URLSearchParams({ user_id }).toString();
 
-export const fetchApiData = createAsyncThunk("userDashboard/fetchData", async (Data) => {
+export const fetchApiData = createAsyncThunk("userDashboard/fetchData", async () => {
+  console.log("from fetch data");
+  console.log(user_id);
+  console.log(authToken);
   try {
-    const { user } = Data;
-    const response = await fetch(`${baseURL}${nestedRoute}`, {
+    const response = await fetch(`${baseURL}${nestedRoute}?${queryParams}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
       },
-      body: JSON.stringify({ user }),
     });
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
-    throw new Error("Error fetching user Dashboard data");
+    throw new Error(error);
   }
 });
 
@@ -26,6 +32,7 @@ export const updateRateOrStatus = createAsyncThunk("userDashboard/update", async
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ rate, status, user, book }),
     });
@@ -59,6 +66,7 @@ const apiDataSlice = createSlice({
       .addCase(fetchApiData.fulfilled, (state, action) => {
         state.isLoading = false;
         state.data = action.payload;
+        console.log("Done Data User");
       })
       .addCase(fetchApiData.rejected, (state, action) => {
         state.isLoading = false;

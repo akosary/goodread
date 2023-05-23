@@ -92,6 +92,7 @@ function LoginPage() {
           window.alert(data.message);
           localStorage.setItem("authToken", token);
           localStorage.setItem("user_id", data.user_id);
+          localStorage.setItem("role", data.role);
           if (data.redirectUrl) {
             window.location.href = data.redirectUrl;
           }

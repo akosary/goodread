@@ -40,6 +40,11 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
 
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
 
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    window.location.href = "/login";
+  };
+
   useEffect(() => {
     // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
@@ -476,6 +481,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             {action &&
               (action.type === "internal" ? (
                 <MKButton
+                  onClick={action.label === "logout" ? handleLogout : null}
                   component={Link}
                   to={action.route}
                   variant={

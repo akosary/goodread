@@ -6,15 +6,8 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
 import MKBox from "components/MKBox";
-import routes from "routes";
-import UserLogin from "../../user Login/userLogin.jsx";
-import footerRoutes from "footer.routes";
-
 import Data from "./allread.jsx";
-// import Card from "@mui/material/Card";
 import bgImage from "assets/images/user/Dashboard/main.jpg";
 import "./index.css";
 import MKTypography from "components/MKTypography";
@@ -63,19 +56,6 @@ export default function index() {
 
   return (
     <>
-      <DefaultNavbar
-        className="nav"
-        routes={routes}
-        action={{
-          type: "internal",
-          route: "/userLogin",
-          component: <UserLogin />,
-          label: "Login",
-          color: "info",
-        }}
-        sticky
-      />
-
       <MKBox
         minHeight="75vh"
         width="100%"
@@ -122,9 +102,6 @@ export default function index() {
             </div>
           </TabPanel>
         </Box>
-        <MKBox pt={6} px={1} mt={6}>
-          <DefaultFooter content={footerRoutes} />
-        </MKBox>
       </Container>
       {console.log("From index")}
     </>

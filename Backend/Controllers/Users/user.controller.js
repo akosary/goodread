@@ -2,7 +2,7 @@ const User = require("../../models/userModel");
 const config = process.env;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const validation=require("../../middleware/ValidationInputs");
+const validation = require("../../middleware/ValidationInputs");
 const hashing = require("../../middleware/hashing");
 
 // CRUD operations
@@ -79,13 +79,11 @@ const remove = async (req, res) => {
   }
 };
 
-
-// registration and logging
 const registeration = async (req, res) => {
   try {
     res.setHeader("Content-Type", "multipart/form-data");
-    const { firstname, lastname, email, password, confirmPassword } =req.body;
-    const image=req.file.filename;
+    const { firstname, lastname, email, password, confirmPassword } = req.body;
+    const image = req.file.filename;
     console.log(image);
     if (!validation.validateInput(firstname, 3, 100)) {
       return res.status(400).json({
@@ -116,7 +114,7 @@ const registeration = async (req, res) => {
     if (password !== confirmPassword) {
       return res.status(400).json({ message: "passwords not match" });
     }
-    if (!image ) {
+    if (!image) {
       return res.status(400).json({ message: "Invalid image file!" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -126,16 +124,17 @@ const registeration = async (req, res) => {
       password: hashedPassword,
       firstname: firstname,
       lastname: lastname,
-      image:`${url}/uploads/${image}`,
+      image: `${url}/uploads/${image}`,
       role: "user",
     });
     const newUser = await user.save();
     const token = jwt.sign({ id: newUser._id }, config.TOKEN_KEY);
     res.json({
-      redirectUrl: '/users',
-      message: "Login successful user.", 
-      token:token,
-      user_id:newUser._id
+      redirectUrl: "/userDashboard",
+      message: "Login successful user.",
+      token: token,
+      user_id: newUser._id,
+      role: newUser.role,
     });
   } catch (error) {
     console.error(error);
@@ -161,20 +160,21 @@ const Adminloggedin = async (req, res) => {
   if (!isMatch) {
     return res.status(401).json({ message: "Invalid password." });
   }
-  
-  if (user.role === 'admin') {
+
+  if (user.role === "admin") {
     const token = jwt.sign({ id: user._id }, config.TOKEN_KEY);
     res.json({
-      redirectUrl: '/admins',
-      message: "Login successful admin.", 
-      token:token,
-      admin_id:user._id
+      redirectUrl: "/",
+      message: "Login successful admin.",
+      token: token,
+      admin_id: user._id,
+      role: user.role,
     });
   } else {
-    return res.status(403).json({message:"not admin"});
+    return res.status(403).json({ message: "not admin" });
   }
-  
 };
+
 const Userloggedin = async (req, res) => {
   const { email, password } = req.body;
 
@@ -193,19 +193,28 @@ const Userloggedin = async (req, res) => {
   if (!isMatch) {
     return res.status(401).json({ message: "Invalid password." });
   }
-  
-  if (user.role === 'user') {
+
+  if (user.role === "user") {
     const token = jwt.sign({ id: user._id }, config.TOKEN_KEY);
     res.json({
-      redirectUrl: '/users',
-      message: "Login successful user.", 
-      token:token,
-      user_id:user._id
+      redirectUrl: "/",
+      message: "Login successful user.",
+      token: token,
+      user_id: user._id,
+      role: user.role,
     });
   } else {
-    return res.status(403).json({message:"not user"});
+    return res.status(403).json({ message: "not user" });
   }
-  
 };
 
-module.exports = { registeration, Adminloggedin,Userloggedin, get, getOne, post, update, remove };
+module.exports = {
+  registeration,
+  Adminloggedin,
+  Userloggedin,
+  get,
+  getOne,
+  post,
+  update,
+  remove,
+};

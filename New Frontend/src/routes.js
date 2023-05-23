@@ -47,7 +47,7 @@ import AboutUs from "layouts/pages/landing-pages/about-us";
 import ContactUs from "layouts/pages/landing-pages/contact-us";
 import Author from "layouts/pages/landing-pages/author";
 import Home from "./components/Home/home.jsx";
-import AllCategories from "components/category/AllCategories.js";
+import Categories from "components/category/Categories.js";
 
 const routes = [
   {
@@ -60,7 +60,7 @@ const routes = [
     name: "Categories",
     icon: <Icon>category</Icon>,
     route: "/categories",
-    component: <AllCategories />,
+    component: <Categories />,
   },
   {
     name: "Authors",
