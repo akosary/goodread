@@ -27,7 +27,7 @@ import Profile from "pages/LandingPages/Author/sections/Profile";
 import Posts from "pages/LandingPages/Author/sections/Posts";
 import Contact from "pages/LandingPages/Author/sections/Contact";
 import Footer from "pages/LandingPages/Author/sections/Footer";
-
+import UserLogin from "components/user Login/userLogin.jsx";
 // Routes
 import routes from "routes";
 
@@ -40,10 +40,11 @@ function Author() {
       <DefaultNavbar
         routes={routes}
         action={{
-          type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "free download",
-          color: "info",
+          type: "internal",
+          route: "/userLogin",
+          component: <UserLogin />,
+          label: "Login",
+          color: "default",
         }}
         transparent
         light

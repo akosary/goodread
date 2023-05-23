@@ -6,22 +6,22 @@ import Card from "@mui/material/Card";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
-// import MKSocialButton from "components/MKSocialButton";
+import MKSocialButton from "components/MKSocialButton";
 
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import "./home.css";
-// import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
+import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
 
 // Presentation page sections
 import Counters from "pages/Presentation/sections/Counters";
-// import Information from "pages/Presentation/sections/Information";
+import Information from "pages/Presentation/sections/Information";
 // import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
 // import Pages from "pages/Presentation/sections/Pages";
 // import Testimonials from "pages/Presentation/sections/Testimonials";
 // import Download from "pages/Presentation/sections/Download";
-import PopularBooks from "../popular/books/popularBooks.jsx";
+import PopularBooks from "../popular/books/popularBooks";
 
 // Presentation page components
 import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
@@ -31,7 +31,7 @@ import bgImage from "assets/images/home/bg-book-5.jpg";
 // Routes
 import routes from "routes";
 import footerRoutes from "footer.routes";
-import UserLogin from "../user Login/userLogin.jsx";
+import UserLogin from "components/user Login/userLogin.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { popularBooksSlice } from "Redux/home/popularBookSlice";
 
@@ -87,7 +87,7 @@ function home() {
                 },
               })}
             >
-              Good Read{" "}
+              Newton{" "}
             </MKTypography>
             <MKTypography
               variant="body1"
@@ -114,39 +114,37 @@ function home() {
         }}
       >
         <Counters />
-        {data != [] && <PopularBooks popularData={data} />}
+        <Information />
+        <PopularBooks popularData={data} />
 
-        {/* <Information /> */}
-        {/* <DesignBlocks />
-        <Pages /> */}
-        {/* <Container sx={{ mt: 6 }}>
+        <Container sx={{ mt: 6 }}>
           <BuiltByDevelopers />
-        </Container> */}
-        {/* <Container>
+        </Container>
+        <Container>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={4}>
               <FilledInfoCard
                 variant="gradient"
                 color="info"
-                icon="flag"
-                title="Getting Started"
-                description="Check the possible ways of working with our product and the necessary files for building your own project."
+                icon="menu_book"
+                title="Fiction"
+                description=" Includes novels, short stories, and other narrative works of imagination."
                 action={{
                   type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/overview/material-kit/",
-                  label: "Let's start",
+                  route: "/",
+                  label: "Explore",
                 }}
               />
             </Grid>
             <Grid item xs={12} lg={4}>
               <FilledInfoCard
                 color="info"
-                icon="precision_manufacturing"
-                title="Plugins"
-                description="Get inspiration and have an overview about the plugins that we used to create the Material Kit."
+                icon="auto_awesome"
+                title="Fantasy"
+                description=" Books featuring magical or supernatural elements set in imaginary worlds."
                 action={{
                   type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/overview/datepicker/",
+                  route: "/",
                   label: "Read more",
                 }}
               />
@@ -154,29 +152,28 @@ function home() {
             <Grid item xs={12} lg={4}>
               <FilledInfoCard
                 color="info"
-                icon="apps"
-                title="Components"
-                description="Material Kit is giving you a lot of pre-made components, that will help you to build UI's faster."
+                icon="favorite"
+                title="Romance"
+                description=" Books that explore romantic relationships and love stories."
                 action={{
                   type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/alerts/material-kit/",
+                  route: "/",
                   label: "Read more",
                 }}
               />
             </Grid>
           </Grid>
-        </Container> */}
-        {/* <Testimonials /> */}
-        {/* <Download /> */}
-        {/* <MKBox pt={18} pb={6}>
+        </Container>
+
+        <MKBox pt={18} pb={6}>
           <Container>
             <Grid container spacing={3}>
               <Grid item xs={12} lg={5} ml="auto" sx={{ textAlign: { xs: "center", lg: "left" } }}>
                 <MKTypography variant="h4" fontWeight="bold" mb={0.5}>
-                  Thank you for your support!
+                  Thank you for your time!
                 </MKTypography>
                 <MKTypography variant="body1" color="text">
-                  We deliver the best web products
+                  We deliver what you want
                 </MKTypography>
               </Grid>
               <Grid
@@ -189,7 +186,7 @@ function home() {
               >
                 <MKSocialButton
                   component="a"
-                  href="https://twitter.com/intent/tweet?text=Check%20Material%20Design%20System%20made%20by%20%40CreativeTim%20%23webdesign%20%23designsystem%20%23mui5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fmaterial-kit-react"
+                  href="#"
                   target="_blank"
                   color="twitter"
                   sx={{ mr: 1 }}
@@ -199,7 +196,7 @@ function home() {
                 </MKSocialButton>
                 <MKSocialButton
                   component="a"
-                  href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-kit-react"
+                  href="#"
                   target="_blank"
                   color="facebook"
                   sx={{ mr: 1 }}
@@ -207,19 +204,14 @@ function home() {
                   <i className="fab fa-facebook" />
                   &nbsp;Share
                 </MKSocialButton>
-                <MKSocialButton
-                  component="a"
-                  href="https://www.pinterest.com/pin/create/button/?url=https://www.creative-tim.com/product/material-kit-react"
-                  target="_blank"
-                  color="pinterest"
-                >
+                <MKSocialButton component="a" href="#" target="_blank" color="pinterest">
                   <i className="fab fa-pinterest" />
                   &nbsp;Pin it
                 </MKSocialButton>
               </Grid>
             </Grid>
           </Container>
-        </MKBox> */}
+        </MKBox>
       </Card>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />

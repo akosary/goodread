@@ -1,89 +1,76 @@
 // @mui icons
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
 // Material Kit 2 React components
 import MKTypography from "components/MKTypography";
 
 // Images
-import logoCT from "assets/images/logo-ct-dark.png";
+import logoCT from "assets/images/logo.png";
 
 const date = new Date().getFullYear();
 
 export default {
   brand: {
-    name: "Material Kit 2",
+    name: "Newton (Book Club)",
     image: logoCT,
     route: "/",
   },
   socials: [
     {
       icon: <FacebookIcon />,
-      link: "https://www.facebook.com/CreativeTim/",
+      link: "#",
     },
     {
       icon: <TwitterIcon />,
-      link: "https://twitter.com/creativetim",
+      link: "#",
     },
-    {
-      icon: <GitHubIcon />,
-      link: "https://github.com/creativetimofficial",
-    },
+
     {
       icon: <YouTubeIcon />,
-      link: "https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w",
+      link: "#",
     },
   ],
   menus: [
     {
-      name: "company",
+      name: "Website",
       items: [
-        { name: "about us", href: "https://www.creative-tim.com/presentation" },
-        { name: "freebies", href: "https://www.creative-tim.com/templates/free" },
-        { name: "premium tools", href: "https://www.creative-tim.com/templates/premium" },
-        { name: "blog", href: "https://www.creative-tim.com/blog" },
+        { name: "about us", href: "http://localhost:3000/pages/landing-pages/about-us" },
+        { name: "Contact us", href: "http://localhost:3000/pages/landing-pages/contact-us" },
       ],
     },
     {
-      name: "resources",
+      name: "Updates",
       items: [
-        { name: "illustrations", href: "https://iradesign.io/" },
-        { name: "bits & snippets", href: "https://www.creative-tim.com/bits" },
-        { name: "affiliate program", href: "https://www.creative-tim.com/affiliates/new" },
+        { name: "Get in touch", href: "#" },
+        { name: "Get in touch", href: "#" },
+        { name: "Get in touch", href: "#" },
+        { name: "Get in touch", href: "#" },
       ],
     },
     {
       name: "help & support",
       items: [
-        { name: "contact us", href: "https://www.creative-tim.com/contact-us" },
-        { name: "knowledge center", href: "https://www.creative-tim.com/knowledge-center" },
-        { name: "custom development", href: "https://services.creative-tim.com/" },
-        { name: "sponsorships", href: "https://www.creative-tim.com/sponsorships" },
-      ],
-    },
-    {
-      name: "legal",
-      items: [
-        { name: "terms & conditions", href: "https://www.creative-tim.com/terms" },
-        { name: "privacy policy", href: "https://www.creative-tim.com/privacy" },
-        { name: "licenses (EULA)", href: "https://www.creative-tim.com/license" },
+        { name: "contact us", href: "#" },
+        { name: "knowledge center", href: "#" },
+        { name: "custom development", href: "#" },
+        { name: "sponsorships", href: "#" },
       ],
     },
   ],
   copyright: (
     <MKTypography variant="button" fontWeight="regular">
-      All rights reserved. Copyright &copy; {date} Material Kit by{" "}
+      Customization &copy; {date} Project Team by{" "}
       <MKTypography
         component="a"
-        href="https://www.creative-tim.com"
+        href="#"
         target="_blank"
         rel="noreferrer"
         variant="button"
         fontWeight="regular"
       >
-        Creative Tim
+        &quot; Ahmed Kosary - Ahmed Ramadan - Nahed Fathy - Nesma Elsayed - Kareem Shabana &quot;
       </MKTypography>
       .
     </MKTypography>
