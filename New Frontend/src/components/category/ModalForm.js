@@ -29,9 +29,9 @@ function ModalForm(props) {
     <MKBox component="section" py={2}>
       <Container>
         <Grid container item xs={12} lg={10} justifyContent="center" mx="auto">
-          <button className={`${props.styleBtn} border-0`} color="info" onClick={toggleModal}>
+          <MKButton variant="gradient" color={props.styleBtn} onClick={toggleModal}>
             {props.content}
-          </button>
+          </MKButton>
         </Grid>
         <Modal open={show} onClose={toggleModal} sx={{ display: "grid", placeItems: "center" }}>
           <Slide direction="down" in={show} timeout={500}>

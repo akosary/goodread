@@ -2,16 +2,17 @@
 import React, { useEffect } from "react";
 import { Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { findAll } from "../../Redux/asyncThunk";
+import { findAll } from "Redux/asyncThunk";
 import MKButton from "components/MKButton";
 import MKBox from "components/MKBox";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import categoriesImage from "assets/images/categories.jpg";
 import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export default function Categories() {
   const navigate = useNavigate();
-  const categories = useSelector((state) => state.category);
+  const categories = useSelector((state) => state.categorySlice.category);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(findAll());

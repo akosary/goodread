@@ -8,5 +8,4 @@ const store = configureStore({
     categorySlice,
   },
 });
-
 export default store;

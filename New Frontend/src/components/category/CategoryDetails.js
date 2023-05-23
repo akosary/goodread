@@ -7,7 +7,7 @@ import mainImage from "assets/images/main.jpg";
 import { Grid } from "@mui/material";
 import BackgroundBlogCard from "examples/Cards/BlogCards/BackgroundBlogCard";
 export default function CategoryDetails() {
-  const categoryBooks = useSelector((state) => state.categoryBooks);
+  const categoryBooks = useSelector((state) => state.categorySlice.categoryBooks);
   const dispatch = useDispatch();
   const { id } = useParams();
   useEffect(() => {
