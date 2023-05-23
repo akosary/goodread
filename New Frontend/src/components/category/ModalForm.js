@@ -13,7 +13,7 @@ import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import MKAlert from "components/MKAlert";
-
+import "./modalForm.css";
 function ModalForm(props) {
   const [show, setShow] = useState(false);
   const toggleModal = () => setShow(!show);

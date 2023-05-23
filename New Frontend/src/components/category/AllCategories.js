@@ -4,10 +4,11 @@ import ModalForm from "./ModalForm";
 import { addCategory, deleteCategory, editCategory, findAll } from "Redux/asyncThunk";
 import { deleteMessage } from "Redux/categorySlice";
 import MKAlert from "components/MKAlert";
-import { TableContainer, TableRow } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 export default function AllCategories() {
@@ -45,17 +46,19 @@ export default function AllCategories() {
       {message && <MKAlert color="success">{message}</MKAlert>}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableRow>
-            <TableCell align="center" className="bold">
-              ID
-            </TableCell>
-            <TableCell align="center" className="bold">
-              Category Name
-            </TableCell>
-            <TableCell align="center" className="bold">
-              Actions
-            </TableCell>
-          </TableRow>
+          <thead>
+            <TableRow>
+              <TableCell align="center" className="bold">
+                ID
+              </TableCell>
+              <TableCell align="center" className="bold">
+                Category Name
+              </TableCell>
+              <TableCell align="center" className="bold">
+                Actions
+              </TableCell>
+            </TableRow>
+          </thead>
           <TableBody>
             {categories &&
               categories.map((category, index) => (
