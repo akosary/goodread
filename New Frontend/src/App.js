@@ -6,16 +6,19 @@ import CssBaseline from "@mui/material/CssBaseline";
 import theme from "assets/theme";
 import Presentation from "layouts/pages/presentation";
 import routes from "routes";
-import AdminLogin from "./ourcomponents/AdminLogin/AdminLogin";
 import Adminpage from "ourcomponents/AdminLogin/Adminpage";
 import Userpage from "ourcomponents/UserLogin/Userpage";
-import UserRegister from "./ourcomponents/registeration/UserRegister";
 import Home from "./components/Home/home.jsx";
 import UserLogin from "./components/user Login/userLogin.jsx";
+import AdminLogin from "./components/adminLogin/AdminLogin";
+import UserRegister from "./components/registeration/UserRegister";
 import UserDashboard from "./components/Dashboard/user/index.jsx";
 import AllCategories from "components/category/AllCategories";
 import Categories from "components/category/Categories";
 import CategoryDetails from "components/category/CategoryDetails";
+import Book from "./components/Book";
+import BookForm from "./components/BookForm";
+import BookAdmin from "./components/bookAdmin";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -53,6 +56,9 @@ export default function App() {
         <Route path="/user" element={<UserLogin />} />
         <Route path="/users" element={<Userpage />} />
         <Route path="/register" element={<UserRegister />} />
+        <Route path="/book" element={<Book />} />
+        <Route path="/bookAdmin" element={<BookAdmin />} />
+        <Route path="books/:id/edit" element={<BookForm />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </ThemeProvider>
