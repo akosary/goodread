@@ -27,6 +27,9 @@ import All from "./components/Dashboard/user/allread.jsx";
 import AllCategories from "components/category/AllCategories";
 import Categories from "components/category/Categories";
 import CategoryDetails from "components/category/CategoryDetails";
+import AuthorAdminView from "./ourcomponents/AuthorAdminView/AuthorTable.jsx";
+import AuthorList from "ourcomponents/AuthorUserView/AuthorList";
+import AuthorDetails from "ourcomponents/AuthorUserView/AuthorDetails";
 // import { Provider } from "react-redux";
 // import categoryStore from "/src/Redux/categoryStore";
 
@@ -68,6 +71,10 @@ export default function App() {
         <Route path="/presentation" element={<Presentation />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admins" element={<Adminpage />} />
+        <Route path="/dashboard/authors" element={<AuthorAdminView />} />
+        <Route path="/users/authors" element={<AuthorList />} />
+        <Route path="/users/authors/:id/books" element={<AuthorDetails />} />
+
         <Route path="/user" element={<UserLogin />} />
         <Route path="/users" element={<Userpage />} />
         <Route path="/register" element={<UserRegister />} />
