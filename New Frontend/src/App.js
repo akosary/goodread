@@ -53,7 +53,7 @@ export default function App() {
         <Route path="/user" element={<UserLogin />} />
         <Route path="/users" element={<Userpage />} />
         <Route path="/register" element={<UserRegister />} />
-        <Route path="*" element={<Navigate to="/home" />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </ThemeProvider>
   );

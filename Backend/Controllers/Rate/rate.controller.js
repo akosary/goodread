@@ -2,8 +2,9 @@ const Rate = require("../../models/rate");
 const subscribers = {};
 
 const get = async (req, res) => {
+  const { user } = req.body;
   try {
-    const rates = await Rate.find().populate([
+    const rates = await Rate.where("user", user).populate([
       {
         path: "book",
         populate: [

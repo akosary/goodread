@@ -2,9 +2,16 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const baseURL = "http://localhost:3500";
 const nestedRoute = "/rates";
 
-export const fetchApiData = createAsyncThunk("userDashboard/fetchData", async () => {
+export const fetchApiData = createAsyncThunk("userDashboard/fetchData", async (Data) => {
   try {
-    const response = await fetch(`${baseURL}${nestedRoute}`);
+    const { user } = Data;
+    const response = await fetch(`${baseURL}${nestedRoute}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user }),
+    });
     const data = await response.json();
     return data;
   } catch (error) {
