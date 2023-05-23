@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ModalForm from "./ModalForm";
 import { addCategory, deleteCategory, editCategory, findAll } from "Redux/asyncThunk";
