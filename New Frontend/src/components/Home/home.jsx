@@ -115,7 +115,9 @@ function home() {
       >
         <Counters />
         <Information />
-        <PopularBooks popularData={data} />
+        <Container>
+          <PopularBooks popularData={data} />
+        </Container>
 
         <Container sx={{ mt: 6 }}>
           <BuiltByDevelopers />
