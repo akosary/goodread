@@ -163,7 +163,6 @@ class bookController {
   }
 
   async popularBooks(req, res) {
-    console.log("popularBooks");
     try {
       const books = await rateModel.aggregate([
         { $group: { _id: "$book", averageRate: { $avg: "$rate" } } },
@@ -176,12 +175,12 @@ class bookController {
           },
         },
         { $sort: { averageRate: -1 } },
-        { $limit: 5 },
+        { $limit: 9 },
       ]);
       const ids = books.map(({ _id }) => _id);
       const popularBookAndHisAuthor = await bookModel
         .find({ _id: { $in: ids } })
-        .populate("authorId");
+        .populate([{ path: "authorId" }, { path: "categoryId" }]);
       return res.status(200).json(popularBookAndHisAuthor);
     } catch (error) {
       return res.status(500).send(error);

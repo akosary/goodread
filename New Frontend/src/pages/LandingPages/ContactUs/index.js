@@ -29,6 +29,7 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 // Routes
 import routes from "routes";
 import footerRoutes from "footer.routes";
+import UserLogin from "components/user Login/userLogin.jsx";
 
 // Image
 import bgImage from "assets/images/illustrations/illustration-reset.jpg";
@@ -40,9 +41,10 @@ function ContactUs() {
         <DefaultNavbar
           routes={routes}
           action={{
-            type: "external",
-            route: "https://www.creative-tim.com/product/material-kit-react",
-            label: "free download",
+            type: "internal",
+            route: "/userLogin",
+            component: <UserLogin />,
+            label: "Login",
             color: "info",
           }}
         />

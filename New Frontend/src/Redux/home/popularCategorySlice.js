@@ -15,16 +15,15 @@ export const fetchApiData = createAsyncThunk("userDashboard/fetchData", async ()
 export const updateRateOrStatus = createAsyncThunk("userDashboard/update", async (data) => {
   try {
     const { id, rate, status, user, book } = data;
+    console.log(data);
     const response = await fetch(`${baseURL}${nestedRoute}/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ rate, status, user, book }),
     });
-    // if (!response.ok) throw new Error("Error updating user Dashboard");
-    const finalData = await response.json();
-    return finalData;
+    if (!response.ok) throw new Error("Error updating user Dashboard");
   } catch (error) {
     throw new Error("Error in sending Data");
   }
@@ -36,13 +35,8 @@ const apiDataSlice = createSlice({
     data: [],
     isLoading: false,
     error: null,
-    message: null,
   },
-  reducers: {
-    changeMessage(state) {
-      state.message = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchApiData.pending, (state) => {
@@ -60,20 +54,16 @@ const apiDataSlice = createSlice({
       .addCase(updateRateOrStatus.pending, (state) => {
         state.isLoading = true;
         state.error = null;
-        console.log("pending");
       })
       .addCase(updateRateOrStatus.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.message = action.payload;
-        console.log("fulfilled");
+        state.data = action.payload;
       })
       .addCase(updateRateOrStatus.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
-        console.log("rejected");
       });
   },
 });
 
-export const { changeMessage } = apiDataSlice.actions;
 export default apiDataSlice.reducer;

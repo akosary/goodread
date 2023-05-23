@@ -1,18 +1,3 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -38,25 +23,26 @@ function Information() {
           <Grid item xs={12} lg={4} sx={{ mx: "auto" }}>
             <RotatingCard>
               <RotatingCardFront
+                color="#767364"
                 image={bgFront}
                 icon="touch_app"
                 title={
                   <>
-                    Feel the
+                    Love Horror
                     <br />
-                    Material Kit
+                    Take The Risk
                   </>
                 }
-                description="All the MUI components that you need in a development have been re-design with the new look."
+                description="Horror/paranormal book cover ... Available as front cover only for ebook or full cover for print for an extra cost of $25 . Adjustments to size and text can be made to suit your book."
               />
               <RotatingCardBack
                 image={bgBack}
                 title="Discover More"
-                description="You will save a lot of time going from prototyping to full-functional code because all elements are implemented."
+                description="Horror/paranormal book cover ... Available as front cover only for ebook or full cover for print for an extra cost of $25 "
                 action={{
                   type: "internal",
-                  route: "/sections/page-sections/page-headers",
-                  label: "start with header",
+                  route: "/books/123",
+                  label: "Read Now",
                 }}
               />
             </RotatingCard>
@@ -65,16 +51,15 @@ function Information() {
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="content_copy"
-                  title="Full Documentation"
-                  description="Built by developers for developers. Check the foundation and you will find
-                    everything inside our documentation."
+                  icon="book"
+                  title="Horror Novels"
+                  description="Horror/paranormal book cover ... Available "
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="flip_to_front"
-                  title="MUI Ready"
+                  icon="watch"
+                  title="Read Any Time"
                   description="The world's most popular react components library for building user interfaces."
                 />
               </Grid>
@@ -82,15 +67,15 @@ function Information() {
             <Grid container spacing={3} sx={{ mt: { xs: 0, md: 6 } }}>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="price_change"
-                  title="Save Time & Money"
+                  icon="favorite"
+                  title="Save Time"
                   description="Creating your design from scratch with dedicated designers can be very expensive. Start with our Design System."
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="devices"
-                  title="Fully Responsive"
+                  icon="circle"
+                  title="Keep Going"
                   description="Regardless of the screen size, the website content will naturally fit the given resolution."
                 />
               </Grid>

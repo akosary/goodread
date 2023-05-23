@@ -102,22 +102,31 @@ export default function index() {
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            <Data filter="All" />
+            <div>
+              <Data filter="All" />
+            </div>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Data filter="Read" />
+            <div>
+              <Data filter="Read" />
+            </div>
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <Data filter="Reading" />
+            <div>
+              <Data filter="Reading" />
+            </div>
           </TabPanel>
           <TabPanel value={value} index={3}>
-            <Data filter="Want to read" />
+            <div>
+              <Data filter="Want to read" />
+            </div>
           </TabPanel>
         </Box>
         <MKBox pt={6} px={1} mt={6}>
           <DefaultFooter content={footerRoutes} />
         </MKBox>
       </Container>
+      {console.log("From index")}
     </>
   );
 }

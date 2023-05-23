@@ -17,9 +17,9 @@ const get = async (req, res) => {
       },
       { path: "user" },
     ]);
-    res.status(200).json(rates);
+    return res.status(200).json(rates);
   } catch (err) {
-    res.status(400).json(err.message);
+    return res.status(400).json(err.message);
   }
 };
 
@@ -68,18 +68,18 @@ const remove = async (req, res) => {
 };
 const update = async (req, res) => {
   const { id } = req.params;
-  const { rate, status } = req.body;
-  if (!rate) {
-    return res.status(400).json("Rate is required");
-  }
+  const { rate, status, user, book } = req.body;
+  // if (!rate) {
+  //   return res.status(400).json("Rate is required");
+  // }
   // if (!status) {
   //   return res.status(400).json("Status is required");
   // }
   try {
-    await Rate.findByIdAndUpdate(id, req.body);
-    res.status(200).json("Updated");
+    await Rate.findByIdAndUpdate(id, { rate, status, user, book });
+    return res.status(200).json("Updated");
   } catch (err) {
-    res.status(400).json(err.message);
+    return res.status(400).json(err.message);
   }
 };
 

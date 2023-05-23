@@ -23,7 +23,6 @@ import UserRegister from "./ourcomponents/registeration/UserRegister";
 import Home from "./components/Home/home.jsx";
 import UserLogin from "./components/user Login/userLogin.jsx";
 import UserDashboard from "./components/Dashboard/user/index.jsx";
-import All from "./components/Dashboard/user/allread.jsx";
 import AllCategories from "components/category/AllCategories";
 import Categories from "components/category/Categories";
 import CategoryDetails from "components/category/CategoryDetails";
@@ -64,7 +63,6 @@ export default function App() {
         <Route path="categories" Component={AllCategories} />
         <Route path="categories/groups" Component={Categories} />
         <Route path="categories/:id/books" Component={CategoryDetails} />
-        <Route path="/all" element={<All />} />
         <Route path="/presentation" element={<Presentation />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admins" element={<Adminpage />} />

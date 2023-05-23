@@ -11,6 +11,6 @@ Router.post("/", rateController.post);
 
 Router.delete("/:id", getOneRateOrStatus, rateController.remove);
 
-Router.patch("/:id", getOneRateOrStatus, rateController.update);
+Router.put("/:id", getOneRateOrStatus, rateController.update);
 
 module.exports = Router;

@@ -2,17 +2,20 @@ import React, { useEffect } from "react";
 import Table from "./userTable.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchApiData, updateRateOrStatus } from "Redux/userdashboard/slice";
+import { changeMessage } from "Redux/userdashboard/slice.js";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function allread({ filter }) {
-  const { data, isLoading, error } = useSelector((state) => state.userDashboard);
+  const { data, isLoading, error, message } = useSelector((state) => state.userDashboard);
   const dispatch = useDispatch();
   const Rows = ["Book Name", "Author", "Rate", "Average Ratting", "Status"];
 
-  const handleDataReceived = (data) => {
-    dispatch(updateRateOrStatus(data));
+  const handleDataReceived = (myData) => {
+    dispatch(updateRateOrStatus(myData));
   };
-  const handleStatusData = (data) => {
-    dispatch(updateRateOrStatus(data));
+
+  const handleStatusData = (myData) => {
+    dispatch(updateRateOrStatus(myData));
   };
 
   // const updateDashboard = (data) => {
@@ -21,10 +24,11 @@ export default function allread({ filter }) {
 
   useEffect(() => {
     dispatch(fetchApiData());
-  }, [dispatch]);
+    dispatch(changeMessage());
+  }, [message]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <CircularProgress color="inherit" className="text-center" />;
   }
 
   if (error) {
@@ -33,13 +37,16 @@ export default function allread({ filter }) {
 
   return (
     <>
-      <Table
-        DData={data}
-        rows={Rows}
-        filter={filter || "All"}
-        onDataReceived={handleDataReceived}
-        statusData={handleStatusData}
-      />
+      {/* {console.log(data)} */}
+      {data && (
+        <Table
+          DData={data}
+          rows={Rows}
+          filter={filter}
+          onDataReceived={handleDataReceived}
+          statusData={handleStatusData}
+        />
+      )}
     </>
   );
 }

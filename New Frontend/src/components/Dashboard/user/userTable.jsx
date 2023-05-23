@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react"; //, { useEffect }
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -18,7 +18,9 @@ export default function userTable({ DData, rows, filter, onDataReceived, statusD
   const Read = DData.filter((item) => item.status == "Read");
   const Want_to_read = DData.filter((item) => item.status == "Want to read");
   const Reading = DData.filter((item) => item.status == "Reading");
-  // const [value, setValue] = React.useState(2);
+  const value = filter || "All";
+  console.log(DData);
+  // const [value, setValue] = React.useState("");
   // const [age, setAge] = React.useState("");
 
   // const handleChange = (event) => {
@@ -32,26 +34,31 @@ export default function userTable({ DData, rows, filter, onDataReceived, statusD
   // const changeRate = (event, newValue) => {
   //   setValue(newValue);
   // };
-
-  useEffect(() => {
-    filter = "All";
-  });
+  // useEffect(() => {
+  //   console.log(filter);
+  //   if (filter == null) {
+  //     setValue("All");
+  //   } else {
+  //     setValue(filter);
+  //   }
+  // }, []);
 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         {/* <TableHead> */}
-        <TableRow>
-          {rows.map((head, index) => {
-            return (
-              <TableCell align="center" className="bold" key={index}>
-                {head}
-              </TableCell>
-            );
-          })}
-        </TableRow>
+        {/* </TableHead> */}
         <TableBody>
-          {filter === "All" ? (
+          <TableRow>
+            {rows.map((head, index) => {
+              return (
+                <TableCell align="center" className="bold" key={index}>
+                  {head}
+                </TableCell>
+              );
+            })}
+          </TableRow>
+          {value == "All" ? (
             DData.map((row) => (
               <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                 <TableCell align="center">{row.book.name}</TableCell>
@@ -102,7 +109,7 @@ export default function userTable({ DData, rows, filter, onDataReceived, statusD
                 </TableCell>
               </TableRow>
             ))
-          ) : filter === "Read" ? (
+          ) : value == "Read" ? (
             Read.map((row) => (
               <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                 <TableCell align="center">{row.book.name}</TableCell>
@@ -153,7 +160,7 @@ export default function userTable({ DData, rows, filter, onDataReceived, statusD
                 </TableCell>
               </TableRow>
             ))
-          ) : filter === "Reading" ? (
+          ) : value == "Reading" ? (
             Reading.map((row) => (
               <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                 <TableCell align="center">{row.book.name}</TableCell>
@@ -204,7 +211,7 @@ export default function userTable({ DData, rows, filter, onDataReceived, statusD
                 </TableCell>
               </TableRow>
             ))
-          ) : filter === "Want to read" ? (
+          ) : value == "Want to read" ? (
             Want_to_read.map((row) => (
               <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                 <TableCell align="center">{row.book.name}</TableCell>
@@ -262,6 +269,7 @@ export default function userTable({ DData, rows, filter, onDataReceived, statusD
           )}
         </TableBody>
       </Table>
+      {console.log("From table")}
     </TableContainer>
   );
 }

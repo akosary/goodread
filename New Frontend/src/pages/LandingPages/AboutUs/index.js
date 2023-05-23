@@ -32,6 +32,7 @@ import Information from "pages/LandingPages/AboutUs/sections/Information";
 import Team from "pages/LandingPages/AboutUs/sections/Team";
 import Featuring from "pages/LandingPages/AboutUs/sections/Featuring";
 import Newsletter from "pages/LandingPages/AboutUs/sections/Newsletter";
+import UserLogin from "components/user Login/userLogin.jsx";
 
 // Routes
 import routes from "routes";
@@ -46,9 +47,10 @@ function AboutUs() {
       <DefaultNavbar
         routes={routes}
         action={{
-          type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "free download",
+          type: "internal",
+          route: "/userLogin",
+          component: <UserLogin />,
+          label: "Login",
           color: "default",
         }}
         transparent
