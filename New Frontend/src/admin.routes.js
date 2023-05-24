@@ -10,7 +10,6 @@ import Icon from "@mui/material/Icon";
 import Author from "layouts/pages/landing-pages/author";
 import Home from "./components/Home/home.jsx";
 import BookAdmin from "./components/bookAdmin";
-
 import AllCategories from "components/category/AllCategories.js";
 
 const routes = [

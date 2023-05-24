@@ -15,7 +15,6 @@ import UserLogin from "./components/user Login/userLogin.jsx";
 import AdminLogin from "./components/adminLogin/AdminLogin";
 import UserRegister from "./components/registeration/UserRegister";
 import UserDashboard from "./components/Dashboard/user/index.jsx";
-// import AllCategories from "components/category/AllCategories";
 import Categories from "components/category/Categories";
 import CategoryDetails from "components/category/CategoryDetails";
 import Book from "./components/Book";
@@ -25,11 +24,11 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar/index.js";
 import MKBox from "components/MKBox";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
+import AllCategories from "components/category/AllCategories.js";
 
 export default function App() {
   const authToken = localStorage.getItem("authToken");
   const role = localStorage.getItem("role");
-  // const user_id = localStorage.getItem("user_id");
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -69,7 +68,7 @@ export default function App() {
           action={{
             type: "internal",
             route: "/",
-            label: "logout",
+            label: "logoutadmin",
             color: "error",
           }}
           sticky
@@ -94,9 +93,9 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/userDashboard" element={<UserDashboard />} />
         <Route path="/userLogin" element={<UserLogin />} />
-        {/* <Route path="categories" Component={AllCategories} /> */}
-        <Route path="categories/groups" Component={Categories} />
-        <Route path="categories/:id/books" Component={CategoryDetails} />
+        <Route path="/categories" Component={AllCategories} />
+        <Route path="/categories/groups" Component={Categories} />
+        <Route path="/categories/:id/books" Component={CategoryDetails} />
         <Route path="/presentation" element={<Presentation />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admins" element={<Adminpage />} />

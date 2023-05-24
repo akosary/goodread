@@ -1,11 +1,4 @@
-import {
-  addCategory,
-  categoryDetails,
-  deleteCategory,
-  editCategory,
-  findAll,
-  popular,
-} from "./asyncThunk";
+import { addCategory, categoryDetails, deleteCategory, editCategory, findAll } from "./asyncThunk";
 
 export const extraReducers = (builder) => {
   builder
@@ -66,19 +59,6 @@ export const extraReducers = (builder) => {
       state.loading = true;
     })
     .addCase(categoryDetails.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message;
-    });
-  builder
-    .addCase(popular.fulfilled, (state, action) => {
-      state.loading = false;
-      // state.categoryBooks = action.payload;
-      console.log(action.payload);
-    })
-    .addCase(popular.pending, (state) => {
-      state.loading = true;
-    })
-    .addCase(popular.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     });

@@ -20,16 +20,16 @@ export default {
   socials: [
     {
       icon: <FacebookIcon />,
-      link: "#",
+      link: "/FacebookIcon",
     },
     {
       icon: <TwitterIcon />,
-      link: "#",
+      link: "/TwitterIcon",
     },
 
     {
       icon: <YouTubeIcon />,
-      link: "#",
+      link: "/YouTubeIcon",
     },
   ],
   menus: [
@@ -43,19 +43,19 @@ export default {
     {
       name: "Updates",
       items: [
-        { name: "Get in touch", href: "#" },
-        { name: "Get in touch", href: "#" },
-        { name: "Get in touch", href: "#" },
-        { name: "Get in touch", href: "#" },
+        { name: "Get in touch1", href: "/href/1" },
+        { name: "Get in touch2", href: "/href/2" },
+        { name: "Get in touch3", href: "/href/3" },
+        { name: "Get in touch4", href: "/href/4" },
       ],
     },
     {
       name: "help & support",
       items: [
-        { name: "contact us", href: "#" },
-        { name: "knowledge center", href: "#" },
-        { name: "custom development", href: "#" },
-        { name: "sponsorships", href: "#" },
+        { name: "contact us", href: "/contact us" },
+        { name: "knowledge center", href: "/knowledge center" },
+        { name: "custom development", href: "/custom development" },
+        { name: "sponsorships", href: "/sponsorships" },
       ],
     },
   ],
@@ -64,7 +64,7 @@ export default {
       Customization &copy; {date} Project Team by{" "}
       <MKTypography
         component="a"
-        href="#"
+        href="/"
         target="_blank"
         rel="noreferrer"
         variant="button"
