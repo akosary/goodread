@@ -68,7 +68,7 @@ export default function App() {
           action={{
             type: "internal",
             route: "/",
-            label: "logoutadmin",
+            label: "logout",
             color: "error",
           }}
           sticky
