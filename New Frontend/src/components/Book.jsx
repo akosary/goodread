@@ -8,6 +8,7 @@ import {
   MDBCol,
 } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
+import "./book.css";
 
 import { booksAPI } from "../Api/Book";
 export default function Book() {

@@ -7,9 +7,11 @@ import Icon from "@mui/material/Icon";
 // Pages
 import AboutUs from "layouts/pages/landing-pages/about-us";
 import ContactUs from "layouts/pages/landing-pages/contact-us";
-import Author from "layouts/pages/landing-pages/author";
+// import Author from "layouts/pages/landing-pages/author";
 import Home from "./components/Home/home.jsx";
 import Categories from "components/category/Categories.js";
+import Book from "components/Book";
+import AuthorList from "ourcomponents/AuthorUserView/AuthorList";
 
 const routes = [
   {
@@ -24,11 +26,23 @@ const routes = [
     route: "/categories/groups",
     component: <Categories />,
   },
+  // {
+  //   name: "Authors",
+  //   icon: <Icon>person</Icon>,
+  //   route: "/authors",
+  //   component: <Author />,
+  // },
+  {
+    name: "Books",
+    icon: <Icon>book</Icon>,
+    route: "/book",
+    component: <Book />,
+  },
   {
     name: "Authors",
     icon: <Icon>person</Icon>,
-    route: "/authors",
-    component: <Author />,
+    route: "/users/authors",
+    component: <AuthorList />,
   },
   {
     name: "About Us ",
