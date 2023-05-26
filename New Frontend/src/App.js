@@ -25,6 +25,11 @@ import MKBox from "components/MKBox";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
 import AllCategories from "components/category/AllCategories.js";
+import AuthorAdminView from "./ourcomponents/AuthorAdminView/AuthorTable.jsx";
+import AuthorList from "ourcomponents/AuthorUserView/AuthorList";
+import AuthorDetails from "ourcomponents/AuthorUserView/AuthorDetails";
+// import { Provider } from "react-redux";
+// import categoryStore from "/src/Redux/categoryStore";
 
 export default function App() {
   const authToken = localStorage.getItem("authToken");
@@ -99,6 +104,10 @@ export default function App() {
         <Route path="/presentation" element={<Presentation />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admins" element={<Adminpage />} />
+        <Route path="/dashboard/authors" element={<AuthorAdminView />} />
+        <Route path="/users/authors" element={<AuthorList />} />
+        <Route path="/users/authors/:id/books" element={<AuthorDetails />} />
+
         <Route path="/user" element={<UserLogin />} />
         <Route path="/users" element={<Userpage />} />
         <Route path="/register" element={<UserRegister />} />

@@ -21,7 +21,7 @@ const upload = require("./utils/multer-upload");
 app.use(
   cors({
     origin: "http://localhost:3000",
-  }),
+  })
 );
 
 app.use(bodyParser.json());
@@ -48,7 +48,7 @@ app.use("/api/v1/authors", auhorRouter);
 // app.use("/api/v1/books", bookRouter);
 const categoryUser = require("./Routes/category/user");
 const categoryAdmin = require("./Routes/category/admin");
-const authShared = require('./middleware/authShared')
+const authShared = require("./middleware/authShared");
 app.use("/user", auth, categoryUser);
 app.use("/admin", ISADMIN, categoryAdmin);
 app.use("/categories", authShared, require("./Routes/category/shared"));

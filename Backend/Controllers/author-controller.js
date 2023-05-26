@@ -1,5 +1,6 @@
 const Author = require("../models/author-model");
-const Book = require("../models/book-model");
+// const Book = require("../models/book-model");
+const Book = require("../models/book");
 const APIFeatures = require("../utils/api-features");
 
 exports.getAllAuthors = async (req, res) => {
@@ -113,9 +114,9 @@ exports.deleteAuthor = async (req, res) => {
 // /authors/:id/books   POST
 exports.addBookToAuthor = async (req, res) => {
   try {
-    const url = `${req.protocol}://${req.get("host")}`;
-    console.log(url);
+    // const url = `${req.protocol}://${req.get("host")}`;
     const authorId = req.params.id;
+    const { categoryId, name, photo } = req.body;
     const author = await Author.findById(authorId);
     if (!author) {
       return res.status(404).send({
@@ -123,10 +124,14 @@ exports.addBookToAuthor = async (req, res) => {
         message: "Aauthor not found",
       });
     }
+    // const book = new Book({
+    //   title: req.body.title,
+    //   author: author._id,
+    //   coverImage: `${url}/uploads/${req.file.filename}`,
+    // });
     const book = new Book({
-      title: req.body.title,
-      author: author._id,
-      coverImage: `${url}/uploads/${req.file.filename}`,
+      ...req.body,
+      authorId,
     });
     await book.save();
     author.books.push(book._id);
