@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   MDBCard,
   MDBCardImage,
@@ -22,10 +23,8 @@ export default function Book() {
   const getAllAuthors = async () => {
     try {
       let response = await booksAPI.getAllAuthors();
-      console.log(JSON.stringify(response.data.data.authors) + "author");
       const data = JSON.stringify(response.data.data.authors);
       setAuthor(JSON.parse(data));
-      console.log(typeof authorList);
     } catch (err) {
       console.log(err);
     }

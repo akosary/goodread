@@ -19,35 +19,10 @@ export default function userTable({ DData, rows, filter, onDataReceived, statusD
   const Want_to_read = DData.filter((item) => item.status == "Want to read");
   const Reading = DData.filter((item) => item.status == "Reading");
   const value = filter || "All";
-  console.log(DData);
-  // const [value, setValue] = React.useState("");
-  // const [age, setAge] = React.useState("");
-
-  // const handleChange = (event) => {
-  //   setAge(event.target.value);
-  // };
-  //   const sendDataToParent = (data) => {
-  //     console.log(data);
-  //     onDataReceived(data);
-  //   };
-
-  // const changeRate = (event, newValue) => {
-  //   setValue(newValue);
-  // };
-  // useEffect(() => {
-  //   console.log(filter);
-  //   if (filter == null) {
-  //     setValue("All");
-  //   } else {
-  //     setValue(filter);
-  //   }
-  // }, []);
 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        {/* <TableHead> */}
-        {/* </TableHead> */}
         <TableBody>
           <TableRow>
             {rows.map((head, index) => {
@@ -269,7 +244,6 @@ export default function userTable({ DData, rows, filter, onDataReceived, statusD
           )}
         </TableBody>
       </Table>
-      {console.log("From table")}
     </TableContainer>
   );
 }

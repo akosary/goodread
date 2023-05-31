@@ -103,7 +103,6 @@ export default function index() {
           </TabPanel>
         </Box>
       </Container>
-      {console.log("From index")}
     </>
   );
 }

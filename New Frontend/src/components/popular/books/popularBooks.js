@@ -38,7 +38,6 @@ function popularBooks({ popularData }) {
                 label: "Read More",
               }}
             />
-            {console.log(book)}
           </Grid>
         ))}
         <Grid item xs={12} sm={12} className="text-center mb-4">
@@ -46,7 +45,7 @@ function popularBooks({ popularData }) {
         </Grid>
         {popularData.map((book) => (
           <Grid item xs={4} key={book._id}>
-            <Item>{book.authorId.firstName}</Item>
+            <Item>{"book.authorId.firstName"}</Item>
           </Grid>
         ))}
         <Grid item xs={12} sm={12} className="text-center mb-4">

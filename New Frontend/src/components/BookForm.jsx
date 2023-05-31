@@ -22,7 +22,6 @@ export default function BookForm() {
   const getAllCategories = async () => {
     try {
       let response = await booksAPI.getAllCategories();
-      console.log(response + "category");
       setCategory(response.data);
     } catch (err) {
       console.log(err);
@@ -32,10 +31,8 @@ export default function BookForm() {
   const getAllAuthors = async () => {
     try {
       let response = await booksAPI.getAllAuthors();
-      console.log(JSON.stringify(response.data.data.authors) + "author");
       const data = JSON.stringify(response.data.data.authors);
       setAuthor(JSON.parse(data));
-      console.log(typeof authorList);
     } catch (err) {
       console.log(err);
     }
@@ -55,7 +52,6 @@ export default function BookForm() {
   }, []);
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(formValue);
     if (id == 0) {
       await booksAPI.addBook(formValue);
     } else {

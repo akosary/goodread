@@ -86,7 +86,6 @@ function LoginPage() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         const token = data.token;
         if (token && data.message) {
           window.alert(data.message);
