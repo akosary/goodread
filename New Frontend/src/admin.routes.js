@@ -7,10 +7,10 @@ import Icon from "@mui/material/Icon";
 // Pages
 // import AboutUs from "layouts/pages/landing-pages/about-us";
 // import ContactUs from "layouts/pages/landing-pages/contact-us";
-import Author from "layouts/pages/landing-pages/author";
 import Home from "./components/Home/home.jsx";
 import BookAdmin from "./components/bookAdmin";
 import AllCategories from "components/category/AllCategories.js";
+import AuthorAdminView from "./ourcomponents/AuthorAdminView/AuthorTable.jsx";
 
 const routes = [
   {
@@ -28,8 +28,8 @@ const routes = [
   {
     name: "Authors",
     icon: <Icon>person</Icon>,
-    route: "/authors",
-    component: <Author />,
+    route: "/dashboard/authors",
+    component: <AuthorAdminView />,
   },
   {
     name: "Books",
