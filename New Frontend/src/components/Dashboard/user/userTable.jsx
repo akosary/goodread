@@ -19,7 +19,6 @@ export default function userTable({ DData, rows, filter, onDataReceived, statusD
   const Want_to_read = DData.filter((item) => item.status == "Want to read");
   const Reading = DData.filter((item) => item.status == "Reading");
   const value = filter || "All";
-  console.log(DData);
   // const [value, setValue] = React.useState("");
   // const [age, setAge] = React.useState("");
 
