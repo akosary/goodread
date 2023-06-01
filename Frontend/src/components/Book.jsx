@@ -62,7 +62,7 @@ export default function Book() {
                       <MDBCardImage src={item?.photo} alt="..." position="top" />
                       <MDBCardBody>
                         <MDBCardTitle>{item?.name}</MDBCardTitle>
-                        <MDBCardText>{item?.authorId}</MDBCardText>
+                        <MDBCardText>{item?.authorId.lastName}</MDBCardText>
                       </MDBCardBody>
                     </MDBCard>
                   </MDBCol>

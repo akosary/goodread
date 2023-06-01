@@ -57,13 +57,14 @@ export default function userTable({ DData, rows, filter, onDataReceived, statusD
           </TableRow>
           {value == "All" ? (
             DData.map((row) => (
-              <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                <TableCell align="center">{row.book.name}</TableCell>
-                <TableCell align="center">{row.book.authorId.firstName}</TableCell>
+              <TableRow key={row?._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                {console.log(row)}
+                <TableCell align="center">{row?.book.name}</TableCell>
+                <TableCell align="center">{row?.book.authorId.firstName}</TableCell>
                 <TableCell align="center">
                   <Rating
                     name="simple-controlled"
-                    value={row.rate}
+                    value={row?.rate}
                     onChange={(event, newValue) => {
                       onDataReceived({
                         id: row._id,

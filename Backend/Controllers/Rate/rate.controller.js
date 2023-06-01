@@ -3,8 +3,6 @@ const subscribers = {};
 
 const get = async (req, res) => {
   const { user_id } = req.query;
-  // console.log(req);
-  console.log(user_id);
   try {
     const rates = await Rate.find({ user: user_id }).populate([
       {
