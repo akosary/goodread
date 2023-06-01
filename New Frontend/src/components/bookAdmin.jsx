@@ -81,6 +81,9 @@ export default function BookAdmin() {
             </thead>
             <TableBody>
               {bookList.map((item, index) => {
+                {
+                  console.log(item);
+                }
                 return (
                   <TableRow
                     key={item._id}
@@ -89,10 +92,10 @@ export default function BookAdmin() {
                     <TableCell align="center">{index + 1}</TableCell>
                     <TableCell align="center">{item?.name}</TableCell>
                     <TableCell align="center">
-                      <img src={item?.photo} alt="" className="w-100 h-100" />
+                      <img src={item?.photo} alt="" />
                     </TableCell>
-                    <TableCell align="center">{item?.categoryId}</TableCell>
-                    <TableCell align="center">{item?.authorId}</TableCell>
+                    <TableCell align="center">{item?.categoryId.name}</TableCell>
+                    <TableCell align="center">{item?.authorId.firstName}</TableCell>
                     <TableCell className="d-flex justify-content-around">
                       <MKButton
                         variant="gradient"

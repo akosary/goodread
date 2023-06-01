@@ -28,6 +28,12 @@ class bookController {
     try {
       bookModel
         .find()
+        .populate([
+          {
+            path: "authorId",
+          },
+          { path: "categoryId" },
+        ])
         .then((books) => {
           res.json({
             message: "All books",

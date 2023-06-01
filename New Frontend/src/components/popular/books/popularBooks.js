@@ -2,19 +2,12 @@ import Grid from "@mui/material/Grid";
 import BackgroundBlogCard from "examples/Cards/BlogCards/BackgroundBlogCard";
 import MKTypography from "components/MKTypography";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
+import MKButton from "components/MKButton";
 import "./popularBooks.css";
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#808080",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+import { useNavigate } from "react-router-dom";
 
 function popularBooks({ popularData }) {
+  const navigate = useNavigate();
   return (
     <>
       <Box sx={{ flexGrow: 1 }} className="mb-4">
@@ -45,33 +38,37 @@ function popularBooks({ popularData }) {
         </Grid>
         {popularData.map((book) => (
           <Grid item xs={4} key={book._id}>
-            <Item>{"book.authorId.firstName"}</Item>
+            <MKButton
+              variant="gradient"
+              color="secondary"
+              className="w-100"
+              onClick={() => {
+                navigate(`/users/authors/${book.authorId._id}/books`);
+              }}
+            >
+              {book.authorId.firstName}
+            </MKButton>
           </Grid>
         ))}
         <Grid item xs={12} sm={12} className="text-center mb-4">
           <MKTypography variant="h1">Popular Categories</MKTypography>
         </Grid>
         {popularData.map((book) => (
-          <Grid item xs={4} key={book._id}>
-            <Item>{book.categoryId.name}</Item>
+          <Grid item xs={4} key={book.categoryId._id}>
+            <MKButton
+              variant="gradient"
+              color="info"
+              className="w-100"
+              onClick={() => {
+                navigate(`/categories/${book.categoryId._id}/books`);
+              }}
+            >
+              {book.categoryId.name}
+            </MKButton>
           </Grid>
         ))}
       </Grid>
     </>
-    // <>
-    //   {Data.map((book) => (
-    //   ))}
-    // </>
-
-    // <Container>
-    //   <Box sx={{ flexGrow: 1 }}>
-    //     <Grid container spacing={2}>
-    //       <Grid item xs={12} sm={9} className="text-center">
-    //         <MKTypography variant="h1">Popular</MKTypography>
-    //       </Grid>
-    //     </Grid>
-    //   </Box>
-    // </Container>
   );
 }
 
