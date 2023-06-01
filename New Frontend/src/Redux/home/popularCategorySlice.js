@@ -15,7 +15,6 @@ export const fetchApiData = createAsyncThunk("userDashboard/fetchData", async ()
 export const updateRateOrStatus = createAsyncThunk("userDashboard/update", async (data) => {
   try {
     const { id, rate, status, user, book } = data;
-    console.log(data);
     const response = await fetch(`${baseURL}${nestedRoute}/${id}`, {
       method: "PATCH",
       headers: {

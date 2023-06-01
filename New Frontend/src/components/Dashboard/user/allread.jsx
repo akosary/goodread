@@ -36,7 +36,6 @@ export default function allread({ filter }) {
 
   return (
     <>
-      {/* {console.log(data)} */}
       {data && (
         <Table
           DData={data}

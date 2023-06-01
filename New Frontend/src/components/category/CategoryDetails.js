@@ -13,7 +13,6 @@ export default function CategoryDetails() {
   const { id } = useParams();
   useEffect(() => {
     dispatch(categoryDetails(id));
-    console.log(categoryBooks);
   }, [dispatch]);
   return (
     <>

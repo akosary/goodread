@@ -6,9 +6,6 @@ const user_id = localStorage.getItem("user_id");
 const queryParams = new URLSearchParams({ user_id }).toString();
 
 export const fetchApiData = createAsyncThunk("userDashboard/fetchData", async () => {
-  console.log("from fetch data");
-  console.log(user_id);
-  console.log(authToken);
   try {
     const response = await fetch(`${baseURL}${nestedRoute}?${queryParams}`, {
       method: "GET",
@@ -18,7 +15,6 @@ export const fetchApiData = createAsyncThunk("userDashboard/fetchData", async ()
       },
     });
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     throw new Error(error);
@@ -66,7 +62,6 @@ const apiDataSlice = createSlice({
       .addCase(fetchApiData.fulfilled, (state, action) => {
         state.isLoading = false;
         state.data = action.payload;
-        console.log("Done Data User");
       })
       .addCase(fetchApiData.rejected, (state, action) => {
         state.isLoading = false;
@@ -75,17 +70,14 @@ const apiDataSlice = createSlice({
       .addCase(updateRateOrStatus.pending, (state) => {
         state.isLoading = true;
         state.error = null;
-        console.log("pending");
       })
       .addCase(updateRateOrStatus.fulfilled, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        console.log("fulfilled");
       })
       .addCase(updateRateOrStatus.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
-        console.log("rejected");
       });
   },
 });

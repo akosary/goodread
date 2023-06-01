@@ -45,8 +45,6 @@ export default function userTable({ DData, rows, filter, onDataReceived, statusD
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        {/* <TableHead> */}
-        {/* </TableHead> */}
         <TableBody>
           <TableRow>
             {rows.map((head, index) => {
@@ -268,7 +266,6 @@ export default function userTable({ DData, rows, filter, onDataReceived, statusD
           )}
         </TableBody>
       </Table>
-      {console.log("From table")}
     </TableContainer>
   );
 }

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { MDBIcon, MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import { booksAPI } from "../Api/Book";
 import "./bookAdmin.css";
+import MKBox from "./MKBox";
+import headerImg from "assets/images/home/bg-book-5.jpg";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
+import MKButton from "./MKButton";
+
 export default function BookAdmin() {
   const navigate = useNavigate();
 
@@ -32,41 +36,86 @@ export default function BookAdmin() {
     navigate("/books/0/edit");
   };
   return (
-    <div className="p-5 text-center">
-      <div>
-        <MDBIcon fas icon="folder-plus" className="fs-1 " onClick={goToAddPage} />
+    <>
+      <MKBox
+        minHeight="75vh"
+        width="100%"
+        sx={{
+          backgroundImage: `url(${headerImg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "top",
+          display: "grid",
+          placeItems: "center",
+        }}
+      ></MKBox>
+      <div className="p-5 text-center">
+        <div>
+          {/* <MDBIcon fas icon="folder-plus" className="fs-1 " onClick={goToAddPage} /> */}
+          <MKButton variant="gradient" color="info" onClick={goToAddPage}>
+            <i className="bi bi-plus-square"></i>
+          </MKButton>
+        </div>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <thead>
+              <TableRow>
+                <TableCell align="center" className="bold">
+                  ID
+                </TableCell>
+                <TableCell align="center" className="bold">
+                  Name
+                </TableCell>
+                <TableCell align="center" className="bold">
+                  Photo
+                </TableCell>
+                <TableCell align="center" className="bold">
+                  CategoryId
+                </TableCell>
+                <TableCell align="center" className="bold">
+                  AuthorId
+                </TableCell>
+                <TableCell align="center" className="bold">
+                  Actions
+                </TableCell>
+              </TableRow>
+            </thead>
+            <TableBody>
+              {bookList.map((item, index) => {
+                return (
+                  <TableRow
+                    key={item._id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="center">{index + 1}</TableCell>
+                    <TableCell align="center">{item?.name}</TableCell>
+                    <TableCell align="center">
+                      <img src={item?.photo} alt="" className="w-100 h-100" />
+                    </TableCell>
+                    <TableCell align="center">{item?.categoryId}</TableCell>
+                    <TableCell align="center">{item?.authorId}</TableCell>
+                    <TableCell className="d-flex justify-content-around">
+                      <MKButton
+                        variant="gradient"
+                        color="warning"
+                        onClick={() => editBook(item._id)}
+                      >
+                        <i className="bi bi-pencil"></i>
+                      </MKButton>
+                      <MKButton
+                        variant="gradient"
+                        color="error"
+                        onClick={() => deleteBook(item._id)}
+                      >
+                        <i className="bi bi-trash3"></i>
+                      </MKButton>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
-      <MDBTable align="middle" className="w-75 text-center">
-        <MDBTableHead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Photo</th>
-            <th scope="col">CategoryId</th>
-            <th scope="col">AuthorId</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </MDBTableHead>
-        <MDBTableBody>
-          {bookList.map((item, index) => {
-            return (
-              <tr key={item._id}>
-                <td>{index}</td>
-                <td>{item?.name}</td>
-                <td>
-                  <img src={item?.photo} alt="" className="w-100 h-100" />
-                </td>
-                <td>{item?.categoryId}</td>
-                <td>{item?.authorId}</td>
-                <td>
-                  <MDBIcon fas icon="pencil-alt" onClick={() => editBook(item._id)} />
-                  <MDBIcon fas icon="eraser" className="p-2" onClick={() => deleteBook(item._id)} />
-                </td>
-              </tr>
-            );
-          })}
-        </MDBTableBody>
-      </MDBTable>
-    </div>
+    </>
   );
 }
