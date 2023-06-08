@@ -11,7 +11,7 @@ import ContactUs from "layouts/pages/landing-pages/contact-us";
 import Home from "./components/Home/home.jsx";
 import Categories from "components/category/Categories.js";
 import Book from "components/Book";
-import AuthorList from "ourcomponents/AuthorUserView/AuthorList";
+// import AuthorList from "ourcomponents/AuthorUserView/AuthorList";
 
 const routes = [
   {
@@ -38,12 +38,12 @@ const routes = [
     route: "/book",
     component: <Book />,
   },
-  {
-    name: "Authors",
-    icon: <Icon>person</Icon>,
-    route: "/users/authors",
-    component: <AuthorList />,
-  },
+  // {
+  //   name: "Authors",
+  //   icon: <Icon>person</Icon>,
+  //   route: "/users/authors",
+  //   component: <AuthorList />,
+  // },
   {
     name: "About Us ",
     icon: <Icon>article</Icon>,

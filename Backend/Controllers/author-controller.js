@@ -35,6 +35,7 @@ exports.getAuthor = async (req, res) => {
   try {
     const { id } = req.params;
     const author = await Author.findById(id).populate("books");
+    author.books = await Book.find({ authorId: id });
     res.status(200).json({
       status: "success",
       data: {

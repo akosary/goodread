@@ -14,6 +14,8 @@ import headerImg from "assets/images/home/bg-book-5.jpg";
 
 import { booksAPI } from "../Api/Book";
 import MKBox from "./MKBox";
+import MKButton from "./MKButton";
+import { useNavigate } from "react-router-dom";
 export default function Book() {
   let [bookList, setBook] = useState([]);
   let [authorList, setAuthor] = useState([]);
@@ -21,7 +23,7 @@ export default function Book() {
     let response = await booksAPI.getAllBooks();
     setBook(response.data.books);
   };
-
+  const navigate = useNavigate();
   const getAllAuthors = async () => {
     try {
       let response = await booksAPI.getAllAuthors();
@@ -61,8 +63,28 @@ export default function Book() {
                     <MDBCard className="h-50 border">
                       <MDBCardImage src={item?.photo} alt="..." position="top" />
                       <MDBCardBody>
-                        <MDBCardTitle>{item?.name}</MDBCardTitle>
-                        <MDBCardText>{item?.authorId.lastName}</MDBCardText>
+                        <div className="d-flex flex-column mt-2">
+                          <p className="fs-4 m-0">Book</p>
+                          <MKButton
+                            variant="gradient"
+                            color="info"
+                            onClick={() => {
+                              navigate(`/categories/${item._id}/books`);
+                            }}
+                          >
+                            {item?.name}
+                          </MKButton>
+                          <p className="fs-4 m-0">Author</p>
+                          <MKButton
+                            variant="gradient"
+                            color="info"
+                            onClick={() => {
+                              navigate(`/users/authors/${item?.authorId._id}/books`);
+                            }}
+                          >
+                            {item?.authorId.firstName}
+                          </MKButton>
+                        </div>
                       </MDBCardBody>
                     </MDBCard>
                   </MDBCol>
