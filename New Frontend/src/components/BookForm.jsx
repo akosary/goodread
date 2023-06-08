@@ -6,23 +6,29 @@ import { booksAPI } from "../Api/Book";
 export default function BookForm() {
   let navigate = useNavigate();
   let [formValue, setFormValues] = useState({});
+  let [categoryList, setCategory] = useState([]);
+  let [authorList, setAuthor] = useState([]);
+
+  let [book, setBook] = useState({
+    name: "",
+    photo: "",
+    categoryId: { name: "" },
+    authorId: { firstName: "", lastName: "" },
+  });
+  const { id } = useParams();
 
   const operationHandler = (e) => {
     setFormValues({
       ...formValue,
+
       [e.target.name]: e.target.value,
     });
   };
-  let [book, setBook] = useState({});
-  const { id } = useParams();
-
-  let [categoryList, setCategory] = useState([]);
-  let [authorList, setAuthor] = useState([]);
 
   const getAllCategories = async () => {
     try {
       let response = await booksAPI.getAllCategories();
-      console.log(response + "category");
+      // console.log(response + "category");
       setCategory(response.data);
     } catch (err) {
       console.log(err);
@@ -34,8 +40,11 @@ export default function BookForm() {
       let response = await booksAPI.getAllAuthors();
       console.log(JSON.stringify(response.data.data.authors) + "author");
       const data = JSON.stringify(response.data.data.authors);
+      console.log("setauthor");
+      console.log(data);
       setAuthor(JSON.parse(data));
-      console.log(typeof authorList);
+
+      // console.log(typeof authorList);
     } catch (err) {
       console.log(err);
     }
@@ -44,8 +53,10 @@ export default function BookForm() {
   const getBookById = async () => {
     let response = await booksAPI.getBookById(id);
     setBook(response.data.book);
-    setFormValues(response.data.books);
+
+    setFormValues(response.data.book);
   };
+
   useEffect(() => {
     if (id != 0) {
       getBookById();
@@ -61,9 +72,11 @@ export default function BookForm() {
     } else {
       await booksAPI.editBook(id, formValue);
     }
-    navigate("/books");
+    navigate("/bookAdmin");
   };
-
+  // console.log("book.authorId");
+  // console.log(book.authorId);
+  // console.log(book.categoryId.firstName);
   return (
     <div className="bg-dark p-5 text-center">
       <h2 className="text-muted m-4">{id == 0 ? "Add Book " : "Edit Book"}</h2>
@@ -75,11 +88,16 @@ export default function BookForm() {
             placeholder="Enter Book Name"
             onChange={operationHandler}
             defaultValue={book.name}
+            required
+            minLength={5}
           />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Select size="lg" name="categoryId" onChange={operationHandler}>
+          <Form.Select size="lg" name="categoryId" onChange={operationHandler} required>
+            <option value={book.categoryId.name}>
+              {id == 0 ? "Choose Category" : book?.categoryId.name}
+            </option>
             {categoryList.map((item) => {
               return (
                 <option key={item._id} value={item._id}>
@@ -91,11 +109,17 @@ export default function BookForm() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Select size="lg" name="authorId" onChange={operationHandler}>
+          <Form.Select size="lg" name="authorId" onChange={operationHandler} required>
+            <option value="">{id == 0 ? "Choose Author" : book?.authorId.firstName}</option>
+
             {authorList.map((item) => {
               return (
-                <option key={item._id} value={item._id}>
-                  {item?.firstName}
+                <option
+                  key={item._id}
+                  value={item._id}
+                  defaultValue={item?.firstName + " " + item?.lastName}
+                >
+                  {item?.firstName + " " + item?.lastName}
                 </option>
               );
             })}
@@ -109,6 +133,7 @@ export default function BookForm() {
             onChange={operationHandler}
             placeholder="Book IMage"
             defaultValue={book.photo}
+            required
           />
         </Form.Group>
 
