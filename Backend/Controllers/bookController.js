@@ -27,6 +27,8 @@ class bookController {
     try {
       bookModel
         .find()
+        .populate("authorId")
+        .populate("categoryId")
         .then((books) => {
           res.json({
             message: "All books",
@@ -80,6 +82,8 @@ class bookController {
       const id = req.params.id;
       bookModel
         .findOne({ _id: id })
+        .populate("authorId")
+        .populate("categoryId")
         .then((book) => {
           res.json({
             message: "your book",
