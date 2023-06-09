@@ -41,7 +41,7 @@ function Information() {
                 description="Horror/paranormal book cover ... Available as front cover only for ebook or full cover for print for an extra cost of $25 "
                 action={{
                   type: "internal",
-                  route: "/books/123",
+                  route: "/books/6468d83700c0dd053f3b4d3a",
                   label: "Read Now",
                 }}
               />
