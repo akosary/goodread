@@ -12,7 +12,8 @@ const AuthorList = () => {
   }, []);
 
   const fetchAuthors = () => {
-    fetch("http://localhost:3500/api/v1/authors")
+    // fetch("http://localhost:3500/api/v1/authors")
+    fetch("https://good-read-api.onrender.com/api/v1/authors")
       .then((res) => res.json())
       .then((authorsData) => {
         console.log(authorsData);

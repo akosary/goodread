@@ -40,7 +40,8 @@ const AuthorTable = () => {
   }, []);
 
   const fetchAuthors = () => {
-    fetch("http://localhost:3500/api/v1/authors")
+    // fetch("http://localhost:3500/api/v1/authors")
+    fetch("https://good-read-api.onrender.com/api/v1/authors")
       .then((res) => res.json())
       .then((authorsData) => {
         setAuthors(authorsData.data.authors);
@@ -50,7 +51,8 @@ const AuthorTable = () => {
 
   // deleteing authors
   const deleteAuthor = (id) => {
-    fetch(`http://localhost:3500/api/v1/authors/${id}`, {
+    // fetch(`http://localhost:3500/api/v1/authors/${id}`, {
+    fetch(`https://good-read-api.onrender.com/api/v1/authors/${id}`, {
       method: "DELETE",
     }).then((response) => {
       if (response.ok) {
@@ -70,7 +72,8 @@ const AuthorTable = () => {
     formDataToSend.append("image", formData.image);
 
     try {
-      const response = await fetch("http://localhost:3500/api/v1/authors", {
+      // const response = await fetch("http://localhost:3500/api/v1/authors", {
+      const response = await fetch("https://good-read-api.onrender.com/api/v1/authors", {
         method: "POST",
         body: formDataToSend,
       });

@@ -80,7 +80,9 @@ function LoginPage() {
     //   confirmPassword: confirmPassword,
     //   image: formData.get("image"),
     // };
-    fetch("http://127.0.0.1:3500/register", {
+
+    // fetch("http://127.0.0.1:3500/register", {
+    fetch("https://good-read-api.onrender.com/register", {
       method: "POST",
       body: formData,
     })

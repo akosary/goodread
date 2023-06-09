@@ -1,8 +1,10 @@
 import axios from "axios";
 
-let baseUrl = "http://localhost:3500/books";
-let catUrl = "http://localhost:3500/categories";
-let authUrl = "http://localhost:3500/api/v1/authors";
+// const url = "https://good-read-api.onrender.com/";
+
+let baseUrl = "https://good-read-api.onrender.com/books";
+let catUrl = "https://good-read-api.onrender.com/categories";
+let authUrl = "https://good-read-api.onrender.com/authors";
 const authToken = localStorage.getItem("authToken");
 
 const getAllAuthors = () => axios.get(authUrl);

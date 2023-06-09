@@ -11,7 +11,8 @@ export default function Userpage() {
   const authToken = localStorage.getItem("authToken");
   const user_id = localStorage.getItem("user_id");
   useEffect(() => {
-    fetch("http://127.0.0.1:3500/users/", {
+    // fetch("http://127.0.0.1:3500/users/", {
+    fetch("https://good-read-api.onrender.com/users/", {
       headers: {
         Authorization: `Bearer ${authToken}`,
       },

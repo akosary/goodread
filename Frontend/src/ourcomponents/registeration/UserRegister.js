@@ -76,7 +76,8 @@ function LoginPage() {
       image: formData.get("image"),
     };
     console.log(data.image);
-    fetch("http://127.0.0.1:3500/register", {
+    // fetch("http://127.0.0.1:3500/register", {
+    fetch("https://good-read-api.onrender.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

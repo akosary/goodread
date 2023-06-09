@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const url = "http://localhost:3500";
+// const url = "http://localhost:3500";
+const url = "https://good-read-api.onrender.com/";
+
 const authToken = localStorage.getItem("authToken");
 
 export const findAll = createAsyncThunk("category/findAll", async () => {

@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-const baseURL = "http://localhost:3500";
+// const baseURL = "http://localhost:3500";
+const baseURL = "https://good-read-api.onrender.com";
+
 const nestedRoute = "/rates";
 
 export const fetchApiData = createAsyncThunk("userDashboard/fetchData", async () => {
