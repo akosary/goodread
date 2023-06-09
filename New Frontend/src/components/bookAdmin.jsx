@@ -73,7 +73,7 @@ export default function BookAdmin() {
                 <td>{index + 1 + offset}</td>
                 <td>{item?.name}</td>
                 <td>
-                  <img src={item?.photo} alt="" className="w-100 h-100" />
+                  <img src={item?.photo} alt="" width="250" height="150" />
                 </td>
                 <td>{item?.categoryId._id}</td>
                 <td>{item?.authorId._id}</td>

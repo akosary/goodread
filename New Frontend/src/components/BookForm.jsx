@@ -95,7 +95,7 @@ export default function BookForm() {
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Select size="lg" name="categoryId" onChange={operationHandler} required>
-            <option value={book.categoryId.name}>
+            <option value={book.categoryId._id} disabled selected>
               {id == 0 ? "Choose Category" : book?.categoryId.name}
             </option>
             {categoryList.map((item) => {
@@ -110,16 +110,14 @@ export default function BookForm() {
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Select size="lg" name="authorId" onChange={operationHandler} required>
-            <option value="">{id == 0 ? "Choose Author" : book?.authorId.firstName}</option>
+            <option value={book.authorId._id} key={book.authorId._id} disabled selected>
+              {id == 0 ? "Choose Author" : book?.authorId.firstName}
+            </option>
 
             {authorList.map((item) => {
               return (
-                <option
-                  key={item._id}
-                  value={item._id}
-                  defaultValue={item?.firstName + " " + item?.lastName}
-                >
-                  {item?.firstName + " " + item?.lastName}
+                <option key={item._id} value={item._id} defaultValue={item?.firstName}>
+                  {item?.firstName}
                 </option>
               );
             })}
